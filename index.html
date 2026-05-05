@@ -1,0 +1,881 @@
+const pptxgen = require("pptxgenjs");
+
+const pres = new pptxgen();
+pres.layout = "LAYOUT_16x9";
+pres.title = "Kế Hoạch Bán Hàng & Marketing – Fratelli Việt Nam 2026";
+pres.author = "Fratelli Vietnam";
+
+// ─── COLORS ───
+const C = {
+  navy:       "0D1626",
+  navyMid:    "152038",
+  navyLight:  "1E2E4A",
+  gold:       "C9A84C",
+  goldLight:  "E2C47A",
+  goldDark:   "A07830",
+  white:      "FFFFFF",
+  cream:      "F5F0E8",
+  creamDark:  "EAE3D2",
+  muted:      "8E9BB0",
+  text:       "1E293B",
+  green:      "1A6B3C",
+  greenLight: "22C55E",
+};
+
+// ─── HELPERS ───
+const makeShadow = () => ({ type: "outer", color: "000000", opacity: 0.13, blur: 8, offset: 3, angle: 135 });
+
+function addCard(slide, x, y, w, h, opts = {}) {
+  slide.addShape(pres.shapes.RECTANGLE, {
+    x, y, w, h,
+    fill: { color: opts.bg || C.white },
+    line: { color: opts.border || "E8E8E8", width: 0.8 },
+    shadow: makeShadow(),
+  });
+  if (opts.accent) {
+    slide.addShape(pres.shapes.RECTANGLE, {
+      x, y, w: 0.07, h,
+      fill: { color: opts.accent },
+      line: { color: opts.accent, width: 0 },
+    });
+  }
+}
+
+function sectionDivider(slide) {
+  slide.background = { color: C.navy };
+  // decorative grid-like lines
+  slide.addShape(pres.shapes.LINE, { x: 0, y: 0, w: 10, h: 0, line: { color: C.gold, width: 0.5, transparency: 75 } });
+  slide.addShape(pres.shapes.LINE, { x: 0, y: 5.625, w: 10, h: 0, line: { color: C.gold, width: 0.5, transparency: 75 } });
+}
+
+function goldTag(slide, x, y, label) {
+  slide.addText(label.toUpperCase(), {
+    x, y, w: 3, h: 0.28,
+    fontSize: 8, bold: true, color: C.gold, charSpacing: 5,
+    align: "left", valign: "middle", margin: 0,
+  });
+}
+
+function sectionTitle(slide, x, y, title, sub) {
+  slide.addText(title, {
+    x, y, w: 9, h: 0.65,
+    fontFace: "Georgia", fontSize: 28, bold: true, color: C.navy,
+    align: "left", valign: "middle", margin: 0,
+  });
+  if (sub) {
+    slide.addText(sub, {
+      x, y: y + 0.68, w: 8.5, h: 0.4,
+      fontSize: 13, color: C.muted, align: "left", valign: "top", margin: 0,
+    });
+  }
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 1 — COVER
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.navy };
+
+  // left gold bar
+  s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.35, h: 5.625, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+  // decorative geometric shapes
+  s.addShape(pres.shapes.OVAL, { x: 6.8, y: -1, w: 5, h: 5, fill: { color: C.navyLight, transparency: 40 }, line: { color: C.navyLight, width: 0 } });
+  s.addShape(pres.shapes.OVAL, { x: 7.5, y: 0.5, w: 3.5, h: 3.5, fill: { color: C.gold, transparency: 88 }, line: { color: C.gold, width: 0 } });
+
+  // eyebrow
+  s.addText("TÀI LIỆU NỘI BỘ  ·  CHIẾN LƯỢC  ·  2026", {
+    x: 0.7, y: 0.7, w: 8, h: 0.3,
+    fontSize: 8, color: C.gold, charSpacing: 5, bold: true,
+    align: "left", margin: 0,
+  });
+
+  // main title
+  s.addText("Kế Hoạch Bán Hàng", {
+    x: 0.7, y: 1.15, w: 7, h: 0.8,
+    fontFace: "Georgia", fontSize: 38, bold: true, color: C.white,
+    align: "left", margin: 0,
+  });
+  s.addText("& Marketing 2026", {
+    x: 0.7, y: 1.9, w: 7, h: 0.75,
+    fontFace: "Georgia", fontSize: 38, bold: true, color: C.gold,
+    align: "left", margin: 0,
+  });
+
+  // subtitle
+  s.addText("Fratelli Việt Nam  —  Italian Style Lighting & Fans", {
+    x: 0.7, y: 2.75, w: 7.5, h: 0.35,
+    fontSize: 14, italic: true, color: C.muted,
+    align: "left", margin: 0,
+  });
+
+  // divider line
+  s.addShape(pres.shapes.LINE, { x: 0.7, y: 3.2, w: 5, h: 0, line: { color: C.gold, width: 1, transparency: 40 } });
+
+  // KPI chips bottom
+  const chips = [
+    { label: "MỤC TIÊU DOANH THU", val: "50 Tỷ VNĐ" },
+    { label: "THỜI GIAN", val: "T5 – T12 / 2026" },
+    { label: "PHỦ SÓNG", val: "Toàn Quốc" },
+  ];
+  chips.forEach((c, i) => {
+    const cx = 0.7 + i * 3.15;
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: 3.45, w: 2.9, h: 0.85, fill: { color: C.navyLight }, line: { color: C.gold, width: 0.6 } });
+    s.addText(c.label, { x: cx, y: 3.48, w: 2.9, h: 0.22, fontSize: 7.5, color: C.gold, bold: true, charSpacing: 3, align: "center", margin: 0 });
+    s.addText(c.val, { x: cx, y: 3.72, w: 2.9, h: 0.52, fontFace: "Georgia", fontSize: 17, bold: true, color: C.white, align: "center", valign: "middle", margin: 0 });
+  });
+
+  // footer
+  s.addText("fratelli.vn  ·  085.886.35.35", {
+    x: 0.7, y: 5.2, w: 9, h: 0.25,
+    fontSize: 9, color: C.muted, align: "left", margin: 0,
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 2 — AGENDA
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  // left panel
+  s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 3.2, h: 5.625, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.08, h: 5.625, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+  s.addText("NỘI DUNG\nTRÌNH BÀY", { x: 0.25, y: 1.8, w: 2.8, h: 1.5, fontFace: "Georgia", fontSize: 26, bold: true, color: C.white, align: "left", margin: 0 });
+  s.addText("Kế hoạch hành động\nT5 – T12 / 2026", { x: 0.25, y: 3.45, w: 2.8, h: 0.9, fontSize: 11, italic: true, color: C.muted, align: "left", margin: 0 });
+
+  // agenda items
+  const items = [
+    { num: "A", title: "Tổng quan chiến lược & phân bổ doanh thu" },
+    { num: "B", title: "Phần I — Kênh Phân Phối Truyền Thống (đại lý)" },
+    { num: "C", title: "Phần I — Kênh KTS & Nhà Thầu (Fratelli FAA)" },
+    { num: "D", title: "Phần II — Trade Marketing & Chiến dịch theo mùa" },
+    { num: "E", title: "Phần II — Digital Marketing (SEO, Ads, Social, KOL)" },
+    { num: "F", title: "Lịch triển khai theo tháng & Ngân sách tổng hợp" },
+  ];
+  items.forEach((item, i) => {
+    const iy = 0.55 + i * 0.83;
+    s.addShape(pres.shapes.RECTANGLE, { x: 3.45, y: iy, w: 6.3, h: 0.7, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+    s.addShape(pres.shapes.RECTANGLE, { x: 3.45, y: iy, w: 0.45, h: 0.7, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+    s.addText(item.num, { x: 3.45, y: iy, w: 0.45, h: 0.7, fontFace: "Georgia", fontSize: 14, bold: true, color: C.gold, align: "center", valign: "middle", margin: 0 });
+    s.addText(item.title, { x: 3.98, y: iy, w: 5.65, h: 0.7, fontSize: 12.5, color: C.text, align: "left", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 3 — TỔNG QUAN & KPI
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.3, "Tổng quan chiến lược");
+  sectionTitle(s, 0.5, 0.55, "Định Hướng & Mục Tiêu 2026", "Hai mũi giáp công: phân phối truyền thống + B2B chuyên nghiệp, được bổ trợ bởi marketing đồng bộ.");
+
+  // Strategic statement box
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.35, w: 9, h: 0.85, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.35, w: 0.12, h: 0.85, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("Fratelli định vị là thương hiệu chiếu sáng & quạt trần phong cách Italia cao cấp hàng đầu VN — cạnh tranh bằng thẩm mỹ, chất lượng và dịch vụ chuyên nghiệp, không phải bằng giá rẻ.", {
+    x: 0.75, y: 1.38, w: 8.55, h: 0.8, fontSize: 12.5, italic: true, color: C.white, align: "left", valign: "middle", margin: 0,
+  });
+
+  // KPI big numbers
+  const kpis = [
+    { val: "50 tỷ", unit: "VNĐ", desc: "Doanh thu T5–T12" },
+    { val: "150+", unit: "điểm bán", desc: "Mạng lưới đại lý" },
+    { val: "200+", unit: "đối tác", desc: "KTS & Nhà thầu" },
+    { val: "6,25 tỷ", unit: "VNĐ/tháng", desc: "Doanh thu trung bình" },
+    { val: "40+", unit: "tỉnh thành", desc: "Phủ sóng toàn quốc" },
+  ];
+  kpis.forEach((k, i) => {
+    const kx = 0.5 + i * 1.82;
+    s.addShape(pres.shapes.RECTANGLE, { x: kx, y: 2.4, w: 1.7, h: 1.55, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+    s.addShape(pres.shapes.RECTANGLE, { x: kx, y: 2.4, w: 1.7, h: 0.05, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+    s.addText(k.val, { x: kx, y: 2.48, w: 1.7, h: 0.7, fontFace: "Georgia", fontSize: 26, bold: true, color: C.navy, align: "center", valign: "middle", margin: 0 });
+    s.addText(k.unit, { x: kx, y: 3.15, w: 1.7, h: 0.25, fontSize: 9, bold: true, color: C.gold, align: "center", margin: 0, charSpacing: 1 });
+    s.addText(k.desc, { x: kx, y: 3.4, w: 1.7, h: 0.4, fontSize: 10, color: C.muted, align: "center", margin: 0 });
+  });
+
+  // Donut chart - revenue split
+  s.addChart(pres.charts.DOUGHNUT, [{
+    name: "Doanh thu",
+    labels: ["Đại lý truyền thống\n27,5 tỷ (55%)", "KTS & Nhà thầu\n15 tỷ (30%)", "Online & trực tiếp\n7,5 tỷ (15%)"],
+    values: [55, 30, 15],
+  }], {
+    x: 0.5, y: 4.05, w: 3.5, h: 1.45,
+    chartColors: [C.navy, C.gold, C.muted],
+    showLegend: true, legendPos: "r",
+    legendFontSize: 9, legendColor: C.text,
+    holeSize: 55,
+    chartArea: { fill: { color: C.cream } },
+    dataLabelColor: C.white, dataLabelFontSize: 10, showPercent: true,
+  });
+
+  // right annotations
+  const splits = [
+    { label: "Kênh đại lý truyền thống", val: "27,5 tỷ", pct: "55%", col: C.navy },
+    { label: "Kênh KTS & Nhà thầu", val: "15 tỷ", pct: "30%", col: C.gold },
+    { label: "Online & Trực tiếp", val: "7,5 tỷ", pct: "15%", col: C.muted },
+  ];
+  splits.forEach((sp, i) => {
+    const sy = 4.1 + i * 0.47;
+    s.addShape(pres.shapes.RECTANGLE, { x: 4.3, y: sy, w: 0.22, h: 0.3, fill: { color: sp.col }, line: { color: sp.col, width: 0 } });
+    s.addText(sp.label, { x: 4.62, y: sy, w: 2.8, h: 0.3, fontSize: 11, color: C.text, valign: "middle", margin: 0 });
+    s.addText(`${sp.val}  ·  ${sp.pct}`, { x: 7.5, y: sy, w: 2, h: 0.3, fontSize: 11, bold: true, color: C.navy, align: "right", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 4 — SECTION DIVIDER: PHẦN I BÁN HÀNG
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  sectionDivider(s);
+
+  s.addShape(pres.shapes.OVAL, { x: -1, y: -1, w: 5, h: 5, fill: { color: C.gold, transparency: 92 }, line: { color: C.gold, width: 0 } });
+  s.addShape(pres.shapes.OVAL, { x: 7, y: 2.5, w: 4, h: 4, fill: { color: C.navyLight, transparency: 50 }, line: { color: C.navyLight, width: 0 } });
+
+  s.addText("PHẦN I", { x: 1, y: 1.5, w: 8, h: 0.45, fontSize: 10, bold: true, color: C.gold, charSpacing: 8, align: "left", margin: 0 });
+  s.addText("Kế Hoạch Bán Hàng", { x: 1, y: 1.95, w: 8, h: 1.1, fontFace: "Georgia", fontSize: 50, bold: true, color: C.white, align: "left", margin: 0 });
+  s.addText("Hai kênh chủ lực: Phân phối truyền thống & Liên kết KTS / Nhà thầu", {
+    x: 1, y: 3.1, w: 7.5, h: 0.5, fontSize: 16, italic: true, color: C.muted, align: "left", margin: 0,
+  });
+  s.addShape(pres.shapes.LINE, { x: 1, y: 3.0, w: 5, h: 0, line: { color: C.gold, width: 1, transparency: 30 } });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 5 — HỆ THỐNG 3 CẤP ĐẠI LÝ
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Kênh phân phối truyền thống — Mục tiêu 27,5 tỷ VNĐ");
+  sectionTitle(s, 0.5, 0.52, "Hệ Thống Phân Phối 3 Cấp", "Mạng lưới 150+ điểm bán phủ 40+ tỉnh thành toàn quốc đến T12/2026.");
+
+  const tiers = [
+    {
+      num: "01", title: "Tổng Đại Lý Vùng", sub: "Nhà phân phối vùng 6–8 tỉnh", target: "6–8 vùng",
+      items: ["Phụ trách 6–8 tỉnh liền kề", "Tồn kho tối thiểu 500tr/lần nhập", "Chiết khấu 20–25%", "Hỗ trợ showroom & POSM", "Có đội sale riêng"],
+    },
+    {
+      num: "02", title: "Đại Lý Cấp 1", sub: "Cửa hàng điện, VLXD, nội thất", target: "60–80 điểm",
+      items: ["Nhập tối thiểu 100tr/tháng", "Chiết khấu 15–18%", "Trưng bày Fratelli Corner", "Đào tạo sản phẩm & bán hàng", "Hỗ trợ POSM đầy đủ"],
+    },
+    {
+      num: "03", title: "Đại Lý Cấp 2", sub: "Điểm bán lẻ huyện/thị trấn", target: "70–90 điểm",
+      items: ["Nhập qua TĐL hoặc Cấp 1", "Chiết khấu 10–12%", "POSM cơ bản & catalogue", "Online training theo nhóm", "Không cam kết tồn kho"],
+    },
+  ];
+
+  tiers.forEach((t, i) => {
+    const tx = 0.5 + i * 3.13;
+    s.addShape(pres.shapes.RECTANGLE, { x: tx, y: 1.38, w: 3, h: 3.85, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+    s.addShape(pres.shapes.RECTANGLE, { x: tx, y: 1.38, w: 3, h: 0.06, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+    // number
+    s.addText(t.num, { x: tx, y: 1.48, w: 0.75, h: 0.6, fontFace: "Georgia", fontSize: 22, bold: true, color: C.gold, align: "center", valign: "middle", margin: 0 });
+    // title + sub
+    s.addText(t.title, { x: tx + 0.78, y: 1.5, w: 2.1, h: 0.35, fontSize: 12.5, bold: true, color: C.navy, align: "left", valign: "middle", margin: 0 });
+    s.addText(t.sub, { x: tx + 0.78, y: 1.84, w: 2.1, h: 0.28, fontSize: 9.5, italic: true, color: C.muted, align: "left", margin: 0 });
+    // target badge
+    s.addShape(pres.shapes.RECTANGLE, { x: tx + 0.15, y: 2.22, w: 2.7, h: 0.3, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+    s.addText(`🎯  MỤC TIÊU: ${t.target}`, { x: tx + 0.15, y: 2.22, w: 2.7, h: 0.3, fontSize: 10, bold: true, color: C.gold, align: "center", valign: "middle", margin: 0 });
+    // items
+    t.items.forEach((item, j) => {
+      s.addText([{ text: item, options: { bullet: true } }], {
+        x: tx + 0.15, y: 2.62 + j * 0.38, w: 2.7, h: 0.37,
+        fontSize: 11, color: C.text, align: "left", valign: "top", margin: 0,
+      });
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 6 — CHÍNH SÁCH ĐẠI LÝ & INCENTIVE
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Chính sách đại lý");
+  sectionTitle(s, 0.5, 0.52, "Kích Hoạt & Giữ Chân Đại Lý", "Hai chương trình then chốt tạo động lực mở rộng và duy trì mạng lưới.");
+
+  // Left block - Combo Start
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 3.85, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText('COMBO FRATELLI START', { x: 0.65, y: 1.5, w: 4.15, h: 0.3, fontSize: 9, bold: true, color: C.gold, charSpacing: 3, margin: 0 });
+  s.addText("Chương Trình Mở Đại Lý Mới", { x: 0.65, y: 1.82, w: 4.15, h: 0.45, fontFace: "Georgia", fontSize: 18, bold: true, color: C.white, align: "left", margin: 0 });
+
+  const startItems = [
+    "Đơn khai trương tối thiểu 50 triệu VNĐ",
+    "Chiết khấu thêm 3–5% trên đơn đầu tiên",
+    "Bộ POSM hoàn chỉnh trị giá 5–10 triệu (miễn phí)",
+    "1–2 sản phẩm mẫu trưng bày tại quầy",
+    "Đào tạo nhân viên bán hàng tại chỗ (1 ngày)",
+    "Hỗ trợ marketing địa phương trên Facebook",
+    "Ưu tiên giao hàng trong 48h",
+  ];
+  startItems.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 0.65, y: 2.38 + i * 0.37, w: 4.15, h: 0.36,
+      fontSize: 11.5, color: C.white, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  // Right block - Incentive
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 3.85, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText('INCENTIVE THEO QUÝ', { x: 5.3, y: 1.5, w: 4, h: 0.3, fontSize: 9, bold: true, color: C.goldDark, charSpacing: 3, margin: 0 });
+  s.addText("Thưởng Doanh Số & Trưng Bày Đẹp", { x: 5.3, y: 1.82, w: 4, h: 0.45, fontFace: "Georgia", fontSize: 18, bold: true, color: C.navy, align: "left", margin: 0 });
+
+  const incentiveRows = [
+    { pct: "100%", reward: "Thưởng thêm 2% doanh thu" },
+    { pct: "120%", reward: "Thưởng 3,5% + quà tặng" },
+    { pct: "150%+", reward: "Thưởng 5% + du lịch / tiền mặt" },
+  ];
+  incentiveRows.forEach((r, i) => {
+    const ry = 2.4 + i * 0.55;
+    s.addShape(pres.shapes.RECTANGLE, { x: 5.3, y: ry, w: 0.8, h: 0.42, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+    s.addText(r.pct, { x: 5.3, y: ry, w: 0.8, h: 0.42, fontFace: "Georgia", fontSize: 14, bold: true, color: C.gold, align: "center", valign: "middle", margin: 0 });
+    s.addText(r.reward, { x: 6.18, y: ry, w: 3.2, h: 0.42, fontSize: 12, color: C.text, valign: "middle", align: "left", margin: 0 });
+  });
+
+  s.addShape(pres.shapes.LINE, { x: 5.3, y: 4.07, w: 3.95, h: 0, line: { color: "E5E7EB", width: 0.8 } });
+  s.addText("Chương Trình Beautiful Display", { x: 5.3, y: 4.15, w: 3.95, h: 0.28, fontSize: 11, bold: true, color: C.navy, margin: 0 });
+  const dispItems = [
+    "Thưởng nguyệt 2–5 triệu cho đại lý trưng bày đẹp",
+    "Thi "Cửa hàng Fratelli đẹp nhất tháng"",
+    "Featured trên fanpage Fratelli toàn quốc",
+  ];
+  dispItems.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 5.3, y: 4.44 + i * 0.33, w: 3.95, h: 0.32,
+      fontSize: 11, color: C.text, align: "left", valign: "top", margin: 0,
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 7 — LỘ TRÌNH PHỦ SÓNG THEO VÙNG
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Kế hoạch phủ sóng toàn quốc");
+  sectionTitle(s, 0.5, 0.52, "Mục Tiêu Theo Vùng", "Ưu tiên T5–T6: HCM & HN — hai thị trường chiếm 50%+ doanh thu toàn kế hoạch.");
+
+  // Table
+  const headers = [
+    [{ text: "Vùng", options: { bold: true, color: C.white } }],
+    [{ text: "Tỉnh trọng điểm", options: { bold: true, color: C.white } }],
+    [{ text: "TĐL Vùng", options: { bold: true, color: C.white } }],
+    [{ text: "ĐL Cấp 1", options: { bold: true, color: C.white } }],
+    [{ text: "Thời điểm", options: { bold: true, color: C.white } }],
+    [{ text: "Doanh thu KH", options: { bold: true, color: C.white } }],
+  ];
+
+  const rows = [
+    ["HCM & Đông Nam Bộ", "HCM, Bình Dương, Đồng Nai, BRVT", "1", "15–20", "T5–T6", { text: "8–10 tỷ", options: { bold: true, color: C.goldDark } }],
+    ["Hà Nội & ĐB Bắc Bộ", "HN, Hải Phòng, Bắc Ninh, Hưng Yên", "1", "12–15", "T5–T6", { text: "7–8 tỷ", options: { bold: true, color: C.goldDark } }],
+    ["Miền Trung", "Đà Nẵng, Huế, Quảng Nam, Khánh Hoà", "1", "10–12", "T6–T7", { text: "4–5 tỷ", options: { bold: true, color: C.goldDark } }],
+    ["ĐBSCL & Tây Nam Bộ", "Cần Thơ, An Giang, Tiền Giang, VL", "1", "10–12", "T7–T8", { text: "4–5 tỷ", options: { bold: true, color: C.goldDark } }],
+    ["Tây Nguyên", "Đắk Lắk, Lâm Đồng, Gia Lai, Kon Tum", "1", "6–8", "T8–T9", { text: "2–3 tỷ", options: { bold: true, color: C.goldDark } }],
+    ["Bắc Trung Bộ", "Thanh Hoá, Nghệ An, Hà Tĩnh", "1", "7–8", "T7–T8", { text: "2–3 tỷ", options: { bold: true, color: C.goldDark } }],
+  ];
+
+  const tableData = [
+    headers.map(h => h[0]),
+    ...rows.map(r => r.map(cell => typeof cell === "string" ? { text: cell, options: {} } : cell)),
+  ];
+
+  s.addTable(tableData, {
+    x: 0.5, y: 1.35, w: 9, h: 3.8,
+    fontSize: 11,
+    color: C.text,
+    rowH: 0.53,
+    border: { pt: 0.6, color: "E5E7EB" },
+    fill: { color: C.white },
+    align: "left",
+    valign: "middle",
+    fontFace: "Calibri",
+    colW: [1.9, 2.4, 0.75, 0.85, 0.85, 1.25],
+  });
+
+  // Manually color header row by overlaying
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.35, w: 9, h: 0.53, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+  const hCols = ["Vùng", "Tỉnh trọng điểm", "TĐL Vùng", "ĐL Cấp 1", "Thời điểm", "Doanh thu KH"];
+  const hWidths = [1.9, 2.4, 0.75, 0.85, 0.85, 1.25];
+  let hx = 0.5;
+  hCols.forEach((h, i) => {
+    s.addText(h, { x: hx + 0.1, y: 1.38, w: hWidths[i] - 0.1, h: 0.48, fontSize: 10.5, bold: true, color: C.gold, align: "left", valign: "middle", margin: 0 });
+    hx += hWidths[i];
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 8 — FRATELLI ARCHITECT ALLIANCE
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Kênh KTS & Nhà thầu — Mục tiêu 15 tỷ VNĐ");
+  sectionTitle(s, 0.5, 0.52, "Fratelli Architect Alliance (FAA)", "Kiến trúc sư & nhà thầu là người chỉ định sản phẩm — 1 KTS tạo ra 10–50x giá trị so với khách lẻ.");
+
+  // Left — KTS program
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 3.88, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("DÀNH CHO KIẾN TRÚC SƯ", { x: 0.65, y: 1.5, w: 4.15, h: 0.28, fontSize: 9, bold: true, color: C.gold, charSpacing: 3, margin: 0 });
+  s.addText("Quyền Lợi Đối Tác FAA", { x: 0.65, y: 1.82, w: 4.15, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.white, align: "left", margin: 0 });
+
+  const ktsItems = [
+    "Hoa hồng giới thiệu dự án 3–5% giá trị đơn",
+    "Catalogue kỹ thuật & file BIM/CAD miễn phí",
+    "Sample sản phẩm để tư vấn khách hàng",
+    "Tham dự hội thảo kỹ thuật & xu hướng",
+    "Thẻ VIP: ưu tiên đặt hàng, giao hàng nhanh",
+    "Featured trên website & mạng xã hội Fratelli",
+    "Giá KTS đặc biệt, không qua đại lý địa phương",
+  ];
+  ktsItems.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 0.65, y: 2.35 + i * 0.37, w: 4.15, h: 0.36,
+      fontSize: 11.5, color: C.white, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  // Right — Nhà thầu tiers
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 3.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("DÀNH CHO NHÀ THẦU", { x: 5.3, y: 1.5, w: 4, h: 0.28, fontSize: 9, bold: true, color: C.goldDark, charSpacing: 3, margin: 0 });
+  s.addText("Phân Cấp Đối Tác Nhà Thầu", { x: 5.3, y: 1.82, w: 4, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.navy, align: "left", margin: 0 });
+
+  const ntTiers = [
+    { tier: "BẠCH KIM", cond: "> 1 tỷ/năm", pct: "15–18%", col: "7DD3FC" },
+    { tier: "VÀNG", cond: "300tr – 1 tỷ/năm", pct: "10–12%", col: C.gold },
+    { tier: "BẠC", cond: "< 300tr/năm", pct: "7%", col: "CBD5E1" },
+  ];
+  ntTiers.forEach((t, i) => {
+    const ty = 2.38 + i * 0.67;
+    s.addShape(pres.shapes.RECTANGLE, { x: 5.3, y: ty, w: 4, h: 0.58, fill: { color: t.col, transparency: 88 }, line: { color: t.col, width: 0.8 } });
+    s.addShape(pres.shapes.RECTANGLE, { x: 5.3, y: ty, w: 0.08, h: 0.58, fill: { color: t.col }, line: { color: t.col, width: 0 } });
+    s.addText(t.tier, { x: 5.46, y: ty, w: 1.3, h: 0.58, fontSize: 11.5, bold: true, color: C.navy, valign: "middle", margin: 0 });
+    s.addText(t.cond, { x: 6.82, y: ty, w: 1.5, h: 0.58, fontSize: 10.5, color: C.muted, italic: true, valign: "middle", margin: 0 });
+    s.addText(t.pct, { x: 8.38, y: ty, w: 0.85, h: 0.58, fontSize: 13, bold: true, color: C.goldDark, align: "right", valign: "middle", margin: 0 });
+  });
+
+  s.addText("Hỗ trợ nhà thầu:", { x: 5.3, y: 4.41, w: 3.95, h: 0.3, fontSize: 10.5, bold: true, color: C.navy, margin: 0 });
+  const ntSupport = ["Tư vấn thiết kế ánh sáng miễn phí + báo giá dự án trong 24h", "Bảo lãnh chất lượng toàn bộ dự án, warranty ưu tiên", "Thanh toán linh hoạt T+30 đến T+60 cho dự án lớn"];
+  ntSupport.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 5.3, y: 4.72 + i * 0.35, w: 3.95, h: 0.34,
+      fontSize: 11, color: C.text, align: "left", valign: "top", margin: 0,
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 9 — SECTION DIVIDER: MARKETING
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  sectionDivider(s);
+
+  s.addShape(pres.shapes.OVAL, { x: 6.5, y: -0.5, w: 5, h: 5, fill: { color: C.gold, transparency: 92 }, line: { color: C.gold, width: 0 } });
+
+  s.addText("PHẦN II", { x: 1, y: 1.5, w: 8, h: 0.45, fontSize: 10, bold: true, color: C.gold, charSpacing: 8, align: "left", margin: 0 });
+  s.addText("Kế Hoạch Marketing", { x: 1, y: 1.95, w: 8, h: 1.1, fontFace: "Georgia", fontSize: 48, bold: true, color: C.white, align: "left", margin: 0 });
+  s.addText("Trade Marketing  &  Digital Marketing — đồng bộ với bán hàng", {
+    x: 1, y: 3.12, w: 7.5, h: 0.5, fontSize: 16, italic: true, color: C.muted, align: "left", margin: 0,
+  });
+  s.addShape(pres.shapes.LINE, { x: 1, y: 3.06, w: 5, h: 0, line: { color: C.gold, width: 1, transparency: 30 } });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 10 — TRADE MARKETING: FRATELLI CORNER & POSM
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Trade Marketing — Kích hoạt tại điểm bán");
+  sectionTitle(s, 0.5, 0.52, "Fratelli Corner & Bộ POSM Chuẩn Thương Hiệu", "Mỗi điểm trưng bày Fratelli phải truyền tải ADN Italia: tinh tế, sang trọng, khác biệt.");
+
+  // Full Corner
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 3.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("FULL CORNER — ĐẠI LÝ CẤP 1", { x: 0.65, y: 1.5, w: 4.15, h: 0.28, fontSize: 9, bold: true, color: C.goldDark, charSpacing: 3, margin: 0 });
+  s.addText("Fratelli Corner Chuẩn", { x: 0.65, y: 1.82, w: 4.15, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.navy, align: "left", margin: 0 });
+
+  const fullItems = [
+    "Kệ kim loại sơn tĩnh điện gold-black, logo nổi bật",
+    "Trưng bày 8–12 SKU đèn LED & 2–3 model quạt trần",
+    "Lightbox viền gold chiếu sáng sản phẩm",
+    "Màn hình mini loop video ứng dụng sản phẩm",
+    "Bộ catalogue kỹ thuật & brochure cảm hứng",
+    "QR code dẫn về trang sản phẩm & tư vấn",
+  ];
+  fullItems.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 0.65, y: 2.35 + i * 0.47, w: 4.15, h: 0.46,
+      fontSize: 12, color: C.text, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  // POSM list
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 3.88, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("BỘ POSM CHUẨN FRATELLI", { x: 5.3, y: 1.5, w: 4, h: 0.28, fontSize: 9, bold: true, color: C.gold, charSpacing: 3, margin: 0 });
+  s.addText("Vật Tư Hỗ Trợ Đại Lý", { x: 5.3, y: 1.82, w: 4, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.white, align: "left", margin: 0 });
+
+  const posm = [
+    ["Banner dọc 0,8×2m", "Hình ảnh không gian sang trọng"],
+    ["Backdrop standee 2×2m", "Cho hội chợ, sự kiện lớn"],
+    ["Wobbler & shelf talker", "Highlight ưu điểm tại kệ"],
+    ["Catalogue sản phẩm A4", "In màu cao cấp, Italy-style"],
+    ["Brochure cảm hứng không gian", "8 trang, phong cách tạp chí"],
+    ["Danh thiếp đại lý", "Logo "Nhà phân phối chính hãng""],
+  ];
+  posm.forEach(([name, note], i) => {
+    const py = 2.35 + i * 0.48;
+    s.addShape(pres.shapes.RECTANGLE, { x: 5.3, y: py, w: 4, h: 0.41, fill: { color: C.navyLight, transparency: 30 }, line: { color: C.navyLight, width: 0 } });
+    s.addText(name, { x: 5.4, y: py + 0.02, w: 2.3, h: 0.38, fontSize: 11.5, bold: true, color: C.white, valign: "middle", margin: 0 });
+    s.addText(note, { x: 7.75, y: py + 0.02, w: 1.5, h: 0.38, fontSize: 10, italic: true, color: C.muted, align: "right", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 11 — 3 CHIẾN DỊCH TRADE MARKETING
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Trade Marketing — Chiến dịch theo mùa");
+  sectionTitle(s, 0.5, 0.52, "Ba Chiến Dịch Kích Hoạt Thị Trường 2026", "Mỗi chiến dịch gắn với mùa xây dựng và mua sắm, thúc đẩy đồng bộ bán hàng + truyền thông.");
+
+  const campaigns = [
+    {
+      period: "T5 – T7 / 2026", budget: "400 triệu",
+      title: "Mùa Hè Mát Lành Fratelli",
+      items: ["Tặng quà theo đơn quạt trần", "Mua 3 tặng 1 bóng đèn / giảm 10% combo", "Kích hoạt tại siêu thị điện máy cuối tuần", "Thưởng đại lý doanh số quạt cao nhất tháng"],
+    },
+    {
+      period: "T8 – T10 / 2026", budget: "500 triệu",
+      title: "Xây Tổ Ấm — Chọn Ánh Sáng Đẹp",
+      items: ["Combo 'Ánh Sáng Toàn Nhà' ưu đãi", "Tư vấn thiết kế ánh sáng miễn phí", "Hội nghị đại lý miền Nam & Bắc", "Tham gia Vietbuild HCM (T9/2026)"],
+    },
+    {
+      period: "T11 – T12 / 2026", budget: "600 triệu",
+      title: "Fratelli End-of-Year Grand Sale",
+      items: ["Flash Sale 11.11 & 12.12 đa kênh", "Mua trước Tết: ưu đãi đến 20%", "Quà Tết doanh nghiệp cho đối tác", "Tham gia Vietbuild HN (T12/2026)"],
+    },
+  ];
+
+  campaigns.forEach((c, i) => {
+    const cx = 0.5 + i * 3.12;
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: 1.38, w: 3, h: 3.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+
+    // header bg
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: 1.38, w: 3, h: 1.3, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: 1.38, w: 3, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+    s.addText(`CHIẾN DỊCH ${i + 1}`, { x: cx + 0.12, y: 1.5, w: 2.76, h: 0.25, fontSize: 8.5, bold: true, color: C.gold, charSpacing: 3, margin: 0 });
+    s.addText(c.title, { x: cx + 0.12, y: 1.77, w: 2.76, h: 0.7, fontFace: "Georgia", fontSize: 14.5, bold: true, color: C.white, align: "left", margin: 0 });
+
+    // period + budget row
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: 2.68, w: 3, h: 0.35, fill: { color: C.gold, transparency: 15 }, line: { color: C.gold, width: 0 } });
+    s.addText(c.period, { x: cx + 0.1, y: 2.68, w: 1.6, h: 0.35, fontSize: 10, bold: true, color: C.navy, valign: "middle", margin: 0 });
+    s.addText(c.budget, { x: cx + 1.75, y: 2.68, w: 1.15, h: 0.35, fontSize: 12, bold: true, color: C.navy, align: "right", valign: "middle", margin: 0 });
+
+    c.items.forEach((item, j) => {
+      s.addText([{ text: item, options: { bullet: true } }], {
+        x: cx + 0.12, y: 3.13 + j * 0.5, w: 2.76, h: 0.48,
+        fontSize: 11.5, color: C.text, align: "left", valign: "top", margin: 0,
+      });
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 12 — DIGITAL MARKETING OVERVIEW
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.navy };
+
+  // Decorative
+  s.addShape(pres.shapes.OVAL, { x: 7.5, y: -1, w: 5, h: 5, fill: { color: C.gold, transparency: 93 }, line: { color: C.gold, width: 0 } });
+
+  goldTag(s, 0.5, 0.32, "Digital Marketing — Ngân sách 1,2–1,5 tỷ VNĐ");
+  s.addText("Hệ Sinh Thái Digital Marketing", {
+    x: 0.5, y: 0.6, w: 8.5, h: 0.75, fontFace: "Georgia", fontSize: 32, bold: true, color: C.white, align: "left", margin: 0,
+  });
+  s.addText("Từ tìm kiếm → mạng xã hội → remarketing — mọi kênh đồng bộ hướng về tăng brand recall và dẫn đơn về đại lý.", {
+    x: 0.5, y: 1.38, w: 8.5, h: 0.4, fontSize: 13, italic: true, color: C.muted, align: "left", margin: 0,
+  });
+
+  const channels = [
+    { label: "SEO & Content", sub: "Top 3 Google · 5 từ khóa chủ lực", budget: "120–150 triệu" },
+    { label: "Facebook & Instagram Ads", sub: "Phân tầng Awareness → Conversion", budget: "350–450 triệu" },
+    { label: "Google Ads", sub: "Search + Display + YouTube", budget: "200–250 triệu" },
+    { label: "TikTok Content", sub: "Viral · Series trước & sau", budget: "80–120 triệu" },
+    { label: "Zalo OA & Email", sub: "B2B · KTS & Nhà thầu", budget: "50–80 triệu" },
+    { label: "KOL & PR báo chí", sub: "Interior KOL · Tạp chí nội thất", budget: "280–400 triệu" },
+  ];
+
+  channels.forEach((ch, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    const cx = 0.5 + col * 3.1;
+    const cy = 1.98 + row * 1.75;
+
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: cy, w: 2.95, h: 1.57, fill: { color: C.navyLight }, line: { color: C.gold, width: 0.6 }, shadow: makeShadow() });
+    s.addShape(pres.shapes.RECTANGLE, { x: cx, y: cy, w: 2.95, h: 0.06, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+    s.addText(ch.label, { x: cx + 0.15, y: cy + 0.12, w: 2.65, h: 0.48, fontSize: 13, bold: true, color: C.white, align: "left", valign: "top", margin: 0 });
+    s.addText(ch.sub, { x: cx + 0.15, y: cy + 0.62, w: 2.65, h: 0.36, fontSize: 10.5, italic: true, color: C.muted, align: "left", margin: 0 });
+    s.addText(ch.budget, { x: cx + 0.15, y: cy + 1.05, w: 2.65, h: 0.38, fontFace: "Georgia", fontSize: 13, bold: true, color: C.gold, align: "left", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 13 — SEO & SOCIAL MEDIA
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Digital Marketing — SEO & Mạng xã hội");
+  sectionTitle(s, 0.5, 0.52, "Nền Tảng Hữu Cơ & Cộng Đồng", "SEO tạo traffic bền vững; Facebook/Instagram/TikTok tạo brand love và pull demand.");
+
+  // SEO box
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.55, h: 3.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.55, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("SEO & CONTENT MARKETING", { x: 0.65, y: 1.5, w: 4.2, h: 0.28, fontSize: 9, bold: true, color: C.goldDark, charSpacing: 3, margin: 0 });
+  s.addText("Chinh Phục Google Top 3", { x: 0.65, y: 1.82, w: 4.2, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.navy, margin: 0 });
+
+  s.addText("Từ khoá SEO trọng tâm:", { x: 0.65, y: 2.35, w: 4.2, h: 0.28, fontSize: 11, bold: true, color: C.navy, margin: 0 });
+  const kws = ["quạt trần cao cấp · quạt trần gỗ", "đèn LED chiếu sáng · downlight cao cấp", "đèn năng lượng mặt trời · solar sân vườn", "đèn LED nhà xưởng · highbay LED", "đại lý đèn LED [tỉnh thành] (local SEO)"];
+  kws.forEach((kw, i) => {
+    s.addText([{ text: kw, options: { bullet: true } }], {
+      x: 0.65, y: 2.63 + i * 0.37, w: 4.2, h: 0.36, fontSize: 11.5, color: C.text, margin: 0, align: "left", valign: "top",
+    });
+  });
+
+  s.addText("4–6 bài blog SEO chất lượng/tháng", { x: 0.65, y: 4.55, w: 4.2, h: 0.3, fontSize: 11, color: C.muted, italic: true, margin: 0 });
+  s.addText("Mục tiêu: Top 3 cho 5 từ khóa · Traffic ×3 · CVR >2%", { x: 0.65, y: 4.85, w: 4.2, h: 0.3, fontSize: 10.5, color: C.goldDark, bold: true, margin: 0 });
+
+  // Social box
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.25, y: 1.38, w: 4.25, h: 3.88, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.25, y: 1.38, w: 4.25, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("FACEBOOK · INSTAGRAM · TIKTOK", { x: 5.4, y: 1.5, w: 3.95, h: 0.28, fontSize: 9, bold: true, color: C.gold, charSpacing: 3, margin: 0 });
+  s.addText("Xây Dựng Cộng Đồng & Kéo Đơn", { x: 5.4, y: 1.82, w: 3.95, h: 0.42, fontFace: "Georgia", fontSize: 16.5, bold: true, color: C.white, margin: 0 });
+
+  const socialItems = [
+    "7–10 posts/tuần đa dạng: hình sản phẩm, video, tips",
+    "Facebook Ads 3 tầng: Awareness → Consideration → CVR",
+    "B2B targeting: KTS & nhà thầu theo nghề nghiệp",
+    "Instagram feed đồng nhất tone gold-dark — Italy aesthetic",
+    "TikTok series 'Trước & Sau' cải tạo ánh sáng phòng",
+    "Challenge UGC: 'Góc nhà đẹp với Fratelli'",
+    "Hashtag: #FratelliLight #ÁnhSángItalia",
+    "Ngân sách: 350–450 triệu · Mục tiêu 50K+ followers",
+  ];
+  socialItems.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 5.4, y: 2.38 + i * 0.37, w: 3.95, h: 0.36, fontSize: 11.5, color: C.white, align: "left", valign: "top", margin: 0,
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 14 — KOL & GOOGLE ADS
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Digital Marketing — Google Ads & KOL");
+  sectionTitle(s, 0.5, 0.52, "Bắt Đúng Intent & Khuếch Đại Thương Hiệu", "Google Ads bắt đúng người có nhu cầu; KOL khuếch đại niềm tin và cảm hứng.");
+
+  // Google Ads
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 3.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.8 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.38, w: 4.45, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("GOOGLE ADS  ·  200–250 triệu", { x: 0.65, y: 1.5, w: 4.15, h: 0.28, fontSize: 9, bold: true, color: C.goldDark, charSpacing: 3, margin: 0 });
+  s.addText("Chinh Phục Người Có Nhu Cầu", { x: 0.65, y: 1.82, w: 4.15, h: 0.42, fontFace: "Georgia", fontSize: 17, bold: true, color: C.navy, margin: 0 });
+
+  s.addText("Search Ads — Intent Marketing", { x: 0.65, y: 2.38, w: 4.15, h: 0.3, fontSize: 11, bold: true, color: C.navy, margin: 0 });
+  const googleS = ["Bắt đúng: 'mua quạt trần cao cấp', 'đèn LED nhà xưởng'", "Landing page riêng cho từng nhóm sản phẩm", "Call extension dẫn thẳng hotline kinh doanh", "Remarketing: nhắm lại người ghé web trong 30 ngày"];
+  googleS.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 0.65, y: 2.7 + i * 0.42, w: 4.15, h: 0.4, fontSize: 11.5, color: C.text, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  s.addText("Display & YouTube Ads — Branding", { x: 0.65, y: 4.42, w: 4.15, h: 0.3, fontSize: 11, bold: true, color: C.navy, margin: 0 });
+  const googleD = ["YouTube Pre-roll 15–30s trước video thiết kế nội thất", "Performance Max tự động tối ưu đa kênh Google"];
+  googleD.forEach((item, i) => {
+    s.addText([{ text: item, options: { bullet: true } }], {
+      x: 0.65, y: 4.74 + i * 0.35, w: 4.15, h: 0.34, fontSize: 11.5, color: C.text, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  // KOL
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 3.88, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 5.15, y: 1.38, w: 4.35, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("KOL & PR BÁO CHÍ  ·  280–400 triệu", { x: 5.3, y: 1.5, w: 4, h: 0.28, fontSize: 9, bold: true, color: C.gold, charSpacing: 2, margin: 0 });
+  s.addText("Khuếch Đại Niềm Tin & Cảm Hứng", { x: 5.3, y: 1.82, w: 4, h: 0.42, fontFace: "Georgia", fontSize: 17, bold: true, color: C.white, margin: 0 });
+
+  const kols = [
+    { type: "KTS & Interior Designer", reach: "10K–100K", note: "Collab FAA + review dự án" },
+    { type: "Home Lifestyle Creator", reach: "50K–500K", note: "Unboxing, lắp đặt, review" },
+    { type: "Micro KOL địa phương", reach: "5K–30K", note: "Seeding chân thực mỗi tỉnh" },
+    { type: "PR báo chí & tạp chí", reach: "Nhà Đẹp, Elle Deco...", note: "Feature trong bài thiết kế" },
+  ];
+  kols.forEach((k, i) => {
+    const ky = 2.38 + i * 0.72;
+    s.addShape(pres.shapes.RECTANGLE, { x: 5.3, y: ky, w: 4, h: 0.62, fill: { color: C.navyLight, transparency: 25 }, line: { color: C.navyLight, width: 0 } });
+    s.addText(k.type, { x: 5.42, y: ky + 0.04, w: 2.6, h: 0.32, fontSize: 12, bold: true, color: C.white, valign: "middle", margin: 0 });
+    s.addText(k.reach, { x: 5.42, y: ky + 0.34, w: 2.6, h: 0.24, fontSize: 10, italic: true, color: C.muted, valign: "middle", margin: 0 });
+    s.addText(k.note, { x: 8.05, y: ky + 0.08, w: 1.15, h: 0.5, fontSize: 10, italic: true, color: C.gold, align: "right", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 15 — ROADMAP THEO THÁNG
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Lịch triển khai");
+  sectionTitle(s, 0.5, 0.52, "Roadmap Thực Thi T5 – T12 / 2026", "");
+
+  const months = [
+    { m: "T5", phase: "Khởi động", items: "Hoàn thiện đội ngũ · Bộ tài liệu bán hàng · POSM · FAA ra mắt · SEO bắt đầu" },
+    { m: "T6", phase: "Mở rộng", items: "Ký đại lý HCM & HN · Fratelli Corner lắp đặt · Chiến dịch Mùa Hè · Incentive Q3" },
+    { m: "T7", phase: "Tăng tốc", items: "Đẩy doanh số Quạt Trần · TĐL Miền Trung & ĐBSCL · Design Seminar HCM" },
+    { m: "T8", phase: "Đỉnh cao", items: "Chiến dịch Xây Tổ Ấm · Hội nghị đại lý Miền Nam · Design Seminar HN · KOL ra mắt" },
+    { m: "T9", phase: "Triển lãm", items: "Vietbuild HCM · Hội nghị đại lý Miền Bắc · Review Q3 · Trao thưởng Incentive Q3" },
+    { m: "T10", phase: "Chuẩn bị Q4", items: "Phủ đại lý tỉnh còn thiếu · Chốt hợp đồng dự án lớn · Tăng budget digital ads" },
+    { m: "T11", phase: "Sprint", items: "Flash Sale 11.11 · Grand Sale bắt đầu · TVC YouTube + Facebook · Quà Tết đối tác" },
+    { m: "T12", phase: "Chốt năm", items: "Flash Sale 12.12 · Vietbuild HN · Gala trao giải · Tổng kết & kế hoạch 2027" },
+  ];
+
+  months.forEach((m, i) => {
+    const row = Math.floor(i / 4);
+    const col = i % 4;
+    const mx = 0.5 + col * 2.38;
+    const my = 1.38 + row * 2.02;
+
+    s.addShape(pres.shapes.RECTANGLE, { x: mx, y: my, w: 2.25, h: 1.88, fill: { color: C.white }, line: { color: "E5E7EB", width: 0.7 }, shadow: makeShadow() });
+    s.addShape(pres.shapes.RECTANGLE, { x: mx, y: my, w: 2.25, h: 0.52, fill: { color: C.navy }, line: { color: C.navy, width: 0 } });
+    s.addShape(pres.shapes.RECTANGLE, { x: mx, y: my, w: 2.25, h: 0.06, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+    s.addText(m.m, { x: mx + 0.1, y: my + 0.08, w: 0.55, h: 0.42, fontFace: "Georgia", fontSize: 18, bold: true, color: C.gold, align: "left", valign: "middle", margin: 0 });
+    s.addText(m.phase, { x: mx + 0.68, y: my + 0.11, w: 1.48, h: 0.38, fontSize: 11, bold: true, color: C.white, valign: "middle", margin: 0 });
+
+    s.addText(m.items, { x: mx + 0.12, y: my + 0.6, w: 2.02, h: 1.2, fontSize: 10.5, color: C.text, align: "left", valign: "top", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 16 — NGÂN SÁCH & KPI
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.cream };
+
+  goldTag(s, 0.5, 0.28, "Ngân sách & Đo lường");
+  sectionTitle(s, 0.5, 0.52, "Phân Bổ Ngân Sách & KPI Tổng Hợp", "");
+
+  // Budget bar chart
+  const budgetData = [{
+    name: "Ngân sách (triệu VNĐ)",
+    labels: ["POSM & Trưng bày", "Sự kiện & Triển lãm", "Digital Paid Ads", "KOL & PR", "Content & SEO", "Incentive đại lý", "Dự phòng"],
+    values: [425, 675, 550, 340, 215, 250, 125],
+  }];
+
+  s.addChart(pres.charts.BAR, budgetData, {
+    x: 0.5, y: 1.38, w: 5.4, h: 3.88,
+    barDir: "bar",
+    chartColors: [C.navy, C.gold, "1E3A5F", C.goldDark, "2D4A7A", "5B7FA6", C.muted],
+    chartArea: { fill: { color: C.cream } },
+    catAxisLabelColor: C.text, catAxisLabelFontSize: 10,
+    valAxisLabelColor: C.muted, valAxisLabelFontSize: 9,
+    valGridLine: { color: "E5E7EB", size: 0.5 },
+    catGridLine: { style: "none" },
+    showValue: true, dataLabelPosition: "outEnd", dataLabelColor: C.navy, dataLabelFontSize: 10,
+    showLegend: false,
+  });
+
+  // KPI list right
+  s.addShape(pres.shapes.RECTANGLE, { x: 6.1, y: 1.38, w: 3.4, h: 3.88, fill: { color: C.navy }, line: { color: C.navy, width: 0 }, shadow: makeShadow() });
+  s.addShape(pres.shapes.RECTANGLE, { x: 6.1, y: 1.38, w: 3.4, h: 0.07, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+  s.addText("KPI & CHỈ SỐ ĐO LƯỜNG", { x: 6.25, y: 1.5, w: 3.1, h: 0.28, fontSize: 9, bold: true, color: C.gold, charSpacing: 2, margin: 0 });
+  s.addText("Mục Tiêu Kết Quả", { x: 6.25, y: 1.82, w: 3.1, h: 0.4, fontFace: "Georgia", fontSize: 17, bold: true, color: C.white, margin: 0 });
+
+  const kpis = [
+    ["Tổng doanh thu T5–T12", "50 tỷ VNĐ"],
+    ["Mạng lưới đại lý", "150+ điểm bán"],
+    ["Đối tác KTS & Nhà thầu", "200+ đối tác"],
+    ["Dự án qua kênh KTS", "40+ dự án"],
+    ["Traffic website", "×3 so với T4"],
+    ["Fanpage followers", "50.000+"],
+    ["Zalo OA followers", "10.000+"],
+    ["ROAS paid ads", "≥ 4×"],
+  ];
+  kpis.forEach((k, i) => {
+    const ky = 2.32 + i * 0.4;
+    s.addShape(pres.shapes.LINE, { x: 6.25, y: ky - 0.03, w: 3.1, h: 0, line: { color: "1E3A5F", width: 0.7 } });
+    s.addText(k[0], { x: 6.25, y: ky, w: 1.9, h: 0.36, fontSize: 11, color: C.muted, valign: "middle", margin: 0 });
+    s.addText(k[1], { x: 8.2, y: ky, w: 1.2, h: 0.36, fontSize: 11.5, bold: true, color: C.gold, align: "right", valign: "middle", margin: 0 });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// SLIDE 17 — CLOSING
+// ════════════════════════════════════════════════════════
+{
+  const s = pres.addSlide();
+  s.background = { color: C.navy };
+
+  s.addShape(pres.shapes.OVAL, { x: -1.5, y: -1, w: 6, h: 6, fill: { color: C.gold, transparency: 93 }, line: { color: C.gold, width: 0 } });
+  s.addShape(pres.shapes.OVAL, { x: 7, y: 2, w: 5, h: 5, fill: { color: C.navyLight, transparency: 50 }, line: { color: C.navyLight, width: 0 } });
+  s.addShape(pres.shapes.RECTANGLE, { x: 9.6, y: 0, w: 0.35, h: 5.625, fill: { color: C.gold }, line: { color: C.gold, width: 0 } });
+
+  s.addText("YẾU TỐ THEN CHỐT ĐỂ THÀNH CÔNG", {
+    x: 1, y: 0.5, w: 8, h: 0.35, fontSize: 9, bold: true, color: C.gold, charSpacing: 5, align: "left", margin: 0,
+  });
+  s.addText("Sẵn Sàng Cho\nMột Năm Bứt Phá", {
+    x: 1, y: 0.88, w: 7.5, h: 1.5, fontFace: "Georgia", fontSize: 42, bold: true, color: C.white, align: "left", margin: 0,
+  });
+
+  s.addShape(pres.shapes.LINE, { x: 1, y: 2.5, w: 7.5, h: 0, line: { color: C.gold, width: 0.8, transparency: 40 } });
+
+  const keys = [
+    "Tuyển đủ đội ngũ sales & marketing trong T5–T6 — không để trống vị trí then chốt",
+    "Sales & Marketing họp đồng bộ ít nhất 2 lần/tháng — cùng một hướng, cùng một mục tiêu",
+    "Ưu tiên HCM & HN trong T5–T6 — hai thị trường chiếm 50%+ doanh thu toàn kế hoạch",
+    "Đo lường chặt chẽ từng đồng ngân sách marketing — ưu tiên kênh có ROI cao nhất",
+    "Chất lượng sản phẩm & dịch vụ là nền tảng — word-of-mouth trong ngành KTS rất mạnh",
+  ];
+  keys.forEach((k, i) => {
+    s.addText([{ text: k, options: { bullet: true } }], {
+      x: 1, y: 2.65 + i * 0.42, w: 8.3, h: 0.4, fontSize: 12.5, color: C.white, align: "left", valign: "top", margin: 0,
+    });
+  });
+
+  s.addText("fratelli.vn  ·  Marketing@fratelli.vn  ·  085.886.35.35", {
+    x: 1, y: 5.2, w: 8.3, h: 0.28, fontSize: 10, color: C.muted, align: "left", margin: 0,
+  });
+}
+
+// ─── WRITE FILE ───
+await pres.writeFile({ fileName: "/home/claude/Fratelli_KeHoach_BanHang_Marketing_2026.pptx" });
+console.log("Done!");
