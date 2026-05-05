@@ -2,658 +2,468 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EnglishPro — Học Tiếng Anh Chuyên Sâu</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --blue: #0EA5E9;
-  --blue-dark: #0284C7;
-  --blue-mid: #38BDF8;
-  --blue-light: #E0F2FE;
-  --orange: #F97316;
-  --orange-dark: #EA580C;
-  --orange-light: #FFF7ED;
-  --orange-mid: #FB923C;
-  --bg: #F0F9FF;
-  --card: #FFFFFF;
-  --text: #1E293B;
-  --text-muted: #64748B;
-  --border: #CBD5E1;
-  --green: #22C55E;
-  --red: #EF4444;
-  --yellow: #F59E0B;
-  --shadow-sm: 0 2px 8px rgba(14,165,233,0.08);
-  --shadow: 0 4px 24px rgba(14,165,233,0.12);
-  --shadow-lg: 0 8px 40px rgba(14,165,233,0.18);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-lg: 24px;
+:root{
+  --blue:#0EA5E9;--blue-d:#0284C7;--blue-l:#E0F2FE;--blue-m:#38BDF8;
+  --orange:#F97316;--orange-d:#EA580C;--orange-l:#FFF7ED;
+  --bg:#F0F9FF;--card:#fff;--text:#1E293B;--muted:#64748B;
+  --border:#CBD5E1;--green:#22C55E;--red:#EF4444;
+  --sh:0 2px 12px rgba(14,165,233,.1);--r:14px;--rs:10px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-h1,h2,h3,h4 { font-family: 'Baloo 2', cursive; }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Baloo 2',cursive}
 
-/* ─── SCREENS ─────────────────────────────── */
-.screen { display: none; min-height: 100vh; }
-.screen.active { display: flex; flex-direction: column; }
+/* ── SCREENS ── */
+.screen{display:none;min-height:100vh;flex-direction:column}
+.screen.active{display:flex}
 
-/* ─── WELCOME SCREEN ──────────────────────── */
-#screen-welcome {
-  background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 40%, #F97316 100%);
-  align-items: center; justify-content: center;
-  text-align: center; padding: 40px 24px; position: relative; overflow: hidden;
-}
-#screen-welcome::before {
-  content: ''; position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.welcome-badge {
-  background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white; border-radius: 50px; padding: 6px 18px;
-  font-size: 13px; font-weight: 700; display: inline-block;
-  margin-bottom: 24px; letter-spacing: 0.5px;
-}
-.welcome-logo {
-  font-family: 'Baloo 2', cursive; font-size: clamp(42px, 10vw, 72px);
-  font-weight: 800; color: white; line-height: 1;
-  text-shadow: 0 4px 24px rgba(0,0,0,0.2); margin-bottom: 8px;
-}
-.welcome-logo span { color: #FED7AA; }
-.welcome-sub {
-  color: rgba(255,255,255,0.9); font-size: clamp(15px, 4vw, 20px);
-  font-weight: 600; margin-bottom: 40px; line-height: 1.5;
-}
-.welcome-features {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-.feat-chip {
-  background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.25);
-  color: white; border-radius: 50px; padding: 8px 16px;
-  font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px;
-}
-.btn-start {
-  background: white; color: var(--blue-dark);
-  border: none; border-radius: 50px;
-  padding: 16px 48px; font-size: 18px; font-weight: 800;
-  font-family: 'Baloo 2', cursive;
-  cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
-}
-.btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-.welcome-footer {
-  position: absolute; bottom: 20px; color: rgba(255,255,255,0.6);
-  font-size: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.welcome-emoji { font-size: 60px; animation: float 3s ease-in-out infinite; display: block; margin-bottom: 16px; }
+/* ── WELCOME ── */
+#sw{background:linear-gradient(135deg,#0EA5E9 0%,#0369A1 45%,#F97316 100%);
+  align-items:center;justify-content:center;text-align:center;
+  padding:40px 24px;position:relative;overflow:hidden}
+#sw::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.06) 0,transparent 50%),
+             radial-gradient(circle at 80% 20%,rgba(255,255,255,.06) 0,transparent 50%)}
+.w-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(8px);color:#fff;border-radius:50px;
+  padding:6px 18px;font-size:13px;font-weight:700;display:inline-block;margin-bottom:20px}
+.w-logo{font-family:'Baloo 2',cursive;font-size:clamp(44px,10vw,72px);
+  font-weight:800;color:#fff;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,.2);margin-bottom:8px}
+.w-logo span{color:#FED7AA}
+.w-sub{color:rgba(255,255,255,.9);font-size:clamp(15px,4vw,19px);
+  font-weight:600;margin-bottom:36px;line-height:1.6}
+.w-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.w-chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(6px);color:#fff;border-radius:50px;
+  padding:8px 16px;font-size:13px;font-weight:600}
+.btn-start{background:#fff;color:var(--blue-d);border:none;border-radius:50px;
+  padding:16px 48px;font-size:18px;font-weight:800;font-family:'Baloo 2',cursive;
+  cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.2);
+  transition:all .3s;display:inline-flex;align-items:center;gap:10px}
+.btn-start:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.28)}
+.w-foot{position:absolute;bottom:16px;color:rgba(255,255,255,.55);font-size:12px;
+  left:50%;transform:translateX(-50%);white-space:nowrap}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.w-emoji{font-size:64px;animation:float 3s ease-in-out infinite;display:block;margin-bottom:16px}
 
-/* ─── SETUP SCREEN ────────────────────────── */
-#screen-setup { background: var(--bg); }
-.setup-header {
-  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
-  color: white; padding: 20px 24px; display: flex; align-items: center; gap: 14px;
-}
-.back-btn {
-  background: rgba(255,255,255,0.2); border: none; color: white;
-  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; transition: background 0.2s; flex-shrink: 0;
-}
-.back-btn:hover { background: rgba(255,255,255,0.35); }
-.setup-title { font-size: 20px; font-weight: 800; }
-.setup-body { padding: 24px; max-width: 680px; margin: 0 auto; width: 100%; }
+/* ── SETUP ── */
+#ss{background:var(--bg)}
+.hdr{background:linear-gradient(135deg,var(--blue-d),var(--blue));
+  color:#fff;padding:18px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.hdr-title{font-size:19px;font-weight:800}
+.back{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;
+  border-radius:50%;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:17px;flex-shrink:0;transition:background .2s}
+.back:hover{background:rgba(255,255,255,.35)}
+.setup-body{padding:22px;max-width:680px;margin:0 auto;width:100%}
+.slabel{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.prog-wrap{background:var(--blue-l);border-radius:50px;height:6px;margin-bottom:22px}
+.prog-fill{background:linear-gradient(90deg,var(--blue),var(--orange));
+  height:100%;border-radius:50px;transition:width .5s ease}
+.step-panel{display:none}
+.step-panel.active{display:block;animation:sIn .35s ease}
+@keyframes sIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.sh2{font-size:clamp(20px,5vw,26px);font-weight:800;margin-bottom:6px}
+.sp{font-size:14px;color:var(--muted);margin-bottom:22px}
 
-/* Progress bar */
-.progress-bar-wrap { background: var(--blue-light); border-radius: 50px; height: 6px; margin-bottom: 24px; }
-.progress-bar-fill { background: linear-gradient(90deg, var(--blue), var(--orange)); height: 100%; border-radius: 50px; transition: width 0.5s ease; }
-.step-label { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+@media(max-width:480px){.role-grid{grid-template-columns:1fr}}
+.role-card{border:2px solid var(--border);border-radius:var(--r);padding:20px 14px;
+  text-align:center;cursor:pointer;background:var(--card);transition:all .25s}
+.role-card:hover{border-color:var(--blue);box-shadow:var(--sh);transform:translateY(-2px)}
+.role-card.sel{border-color:var(--blue);background:var(--blue-l)}
+.rc-icon{font-size:38px;display:block;margin-bottom:8px}
+.rc-name{font-weight:800;font-size:15px}
+.rc-desc{font-size:12px;color:var(--muted);margin-top:3px}
 
-.step-panel { display: none; }
-.step-panel.active { display: block; animation: slideIn 0.4s ease; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:480px){.frow{grid-template-columns:1fr}}
+.fg label{font-size:13px;font-weight:700;display:block;margin-bottom:5px}
+.fg select,.fg input,.fg textarea{
+  width:100%;padding:11px 14px;border:2px solid var(--border);
+  border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:15px;
+  color:var(--text);background:var(--card);outline:none;transition:border-color .2s;
+  -webkit-appearance:none;appearance:none}
+.fg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%2364748B'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.fg select:focus,.fg input:focus,.fg textarea:focus{border-color:var(--blue)}
 
-.step-heading { font-size: clamp(20px, 5vw, 26px); font-weight: 800; color: var(--text); margin-bottom: 6px; }
-.step-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+.skill-chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:22px}
+.s-chip{padding:9px 16px;border:2px solid var(--border);border-radius:50px;
+  cursor:pointer;font-size:14px;font-weight:700;background:var(--card);
+  transition:all .2s;color:var(--text);display:flex;align-items:center;gap:6px}
+.s-chip:hover{border-color:var(--orange)}
+.s-chip.sel{border-color:var(--orange);background:var(--orange-l);color:var(--orange-d)}
 
-/* Role cards */
-.role-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-@media(max-width: 480px) { .role-cards { grid-template-columns: 1fr; } }
-.role-card {
-  border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 16px;
-  text-align: center; cursor: pointer; background: var(--card); transition: all 0.3s;
-}
-.role-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.role-card.selected { border-color: var(--blue); background: var(--blue-light); }
-.role-card .role-icon { font-size: 36px; margin-bottom: 8px; display: block; }
-.role-card .role-name { font-weight: 800; font-size: 15px; color: var(--text); }
-.role-card .role-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.t-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.t-tag{background:var(--blue-l);color:var(--blue-d);border-radius:50px;
+  padding:4px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.t-tag:hover{background:var(--blue);color:#fff}
 
-/* Grade + Level selects */
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-@media(max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
-.form-group label { font-size: 13px; font-weight: 700; color: var(--text); display: block; margin-bottom: 6px; }
-.form-group select, .form-group input, .form-group textarea {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border);
-  border-radius: var(--radius-sm); font-family: 'Nunito', sans-serif;
-  font-size: 15px; color: var(--text); background: var(--card);
-  outline: none; transition: border-color 0.2s;
-  -webkit-appearance: none; appearance: none;
-}
-.form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%2364748B'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-.form-group select:focus, .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); }
-.form-group textarea { min-height: 90px; resize: vertical; }
+.nav-btns{display:flex;gap:10px;margin-top:6px}
+.btn-p{flex:1;background:linear-gradient(135deg,var(--blue),var(--blue-d));color:#fff;
+  border:none;border-radius:var(--rs);padding:13px;font-size:16px;font-weight:800;
+  cursor:pointer;transition:all .3s;font-family:'Baloo 2',cursive;
+  display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-p:hover{box-shadow:0 6px 18px rgba(14,165,233,.4);transform:translateY(-1px)}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-s{background:var(--card);color:var(--muted);border:2px solid var(--border);
+  border-radius:var(--rs);padding:13px 22px;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif}
+.btn-s:hover{border-color:var(--blue);color:var(--blue)}
+.btn-o{flex:1;background:linear-gradient(135deg,var(--orange),var(--orange-d));color:#fff;
+  border:none;border-radius:var(--rs);padding:13px;font-size:16px;font-weight:800;
+  cursor:pointer;transition:all .3s;font-family:'Baloo 2',cursive;
+  display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-o:hover{box-shadow:0 6px 18px rgba(249,115,22,.4);transform:translateY(-1px)}
+.btn-o:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 
-/* Skill chips */
-.skill-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-.skill-chip {
-  padding: 10px 18px; border: 2px solid var(--border); border-radius: 50px;
-  cursor: pointer; font-size: 14px; font-weight: 700; background: var(--card);
-  transition: all 0.25s; display: flex; align-items: center; gap: 7px; color: var(--text);
-}
-.skill-chip:hover { border-color: var(--orange); }
-.skill-chip.selected { border-color: var(--orange); background: var(--orange-light); color: var(--orange-dark); }
+/* ── API KEY MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);
+  backdrop-filter:blur(4px);z-index:1000;display:flex;
+  align-items:center;justify-content:center;padding:20px;display:none}
+.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+.modal-box{background:#fff;border-radius:20px;padding:28px;
+  max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-title{font-size:20px;font-weight:800;margin-bottom:6px;color:var(--text)}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.modal-input{width:100%;padding:12px 14px;border:2px solid var(--border);
+  border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:15px;
+  color:var(--text);outline:none;margin-bottom:12px;transition:border-color .2s}
+.modal-input:focus{border-color:var(--blue)}
+.modal-btns{display:flex;gap:10px}
+.modal-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+.modal-note a{color:var(--blue);text-decoration:none}
+.modal-note a:hover{text-decoration:underline}
+.key-badge{display:flex;align-items:center;gap:8px;background:var(--blue-l);
+  border-radius:var(--rs);padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--blue-d);font-weight:700}
 
-/* Topic suggestions */
-.topic-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.topic-tag {
-  background: var(--blue-light); color: var(--blue-dark); border-radius: 50px;
-  padding: 5px 14px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s;
-}
-.topic-tag:hover { background: var(--blue); color: white; }
+/* ── LOADING ── */
+#sl{background:linear-gradient(135deg,var(--blue-d) 0%,var(--blue) 60%,#0c4a6e 100%);
+  align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.ld-card{background:rgba(255,255,255,.1);backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.2);border-radius:22px;
+  padding:44px 36px;max-width:400px;width:100%}
+.ld-spin{width:60px;height:60px;margin:0 auto 20px;
+  border:4px solid rgba(255,255,255,.2);border-top-color:var(--orange);
+  border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:7px}
+.ld-msg{color:rgba(255,255,255,.8);font-size:14px;line-height:1.6}
+.ld-steps{margin-top:22px;text-align:left}
+.ld-step{display:flex;align-items:center;gap:10px;padding:7px 0;
+  color:rgba(255,255,255,.55);font-size:13px;font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,.1)}
+.ld-step:last-child{border-bottom:none}
+.ld-step.done{color:#86EFAC}
+.ld-step.act{color:#fff}
+.sdot{width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+  background:rgba(255,255,255,.15)}
+.ld-step.done .sdot{background:var(--green)}
+.ld-step.act .sdot{background:var(--orange);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 
-/* Nav buttons */
-.nav-btns { display: flex; gap: 12px; margin-top: 8px; }
-.btn-primary {
-  flex: 1; background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-  color: white; border: none; border-radius: var(--radius-sm); padding: 14px;
-  font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s;
-  font-family: 'Baloo 2', cursive; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-primary:hover { box-shadow: 0 6px 20px rgba(14,165,233,0.4); transform: translateY(-1px); }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.btn-secondary {
-  background: var(--card); color: var(--text-muted); border: 2px solid var(--border);
-  border-radius: var(--radius-sm); padding: 14px 24px;
-  font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
-  font-family: 'Nunito', sans-serif;
-}
-.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-.btn-orange {
-  flex: 1; background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: white; border: none; border-radius: var(--radius-sm); padding: 14px;
-  font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s;
-  font-family: 'Baloo 2', cursive; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-orange:hover { box-shadow: 0 6px 20px rgba(249,115,22,0.4); transform: translateY(-1px); }
+/* ── LESSON ── */
+#sle{background:var(--bg)}
+.l-hdr{background:#fff;border-bottom:1px solid var(--border);
+  padding:14px 18px;position:sticky;top:0;z-index:100;box-shadow:var(--sh);flex-shrink:0}
+.l-hdr-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.l-title{font-size:17px;font-weight:800;flex:1;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mbadge{background:var(--blue-l);color:var(--blue-d);padding:3px 9px;
+  border-radius:50px;font-size:11px;font-weight:700}
+.mbadge.or{background:var(--orange-l);color:var(--orange-d)}
+.l-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.tabs{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:7px 14px;border:none;background:none;
+  border-radius:50px;cursor:pointer;font-size:13px;font-weight:700;
+  color:var(--muted);transition:all .2s;white-space:nowrap;font-family:'Nunito',sans-serif}
+.tab-btn.active{background:var(--blue);color:#fff}
+.tab-btn:hover:not(.active){background:var(--blue-l);color:var(--blue-d)}
+.tab-c{display:none;padding:18px;max-width:760px;margin:0 auto;width:100%}
+.tab-c.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ─── LOADING SCREEN ──────────────────────── */
-#screen-loading {
-  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #0c4a6e 100%);
-  align-items: center; justify-content: center; text-align: center; padding: 40px 24px;
-}
-.loading-card {
-  background: rgba(255,255,255,0.1); backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg);
-  padding: 48px 40px; max-width: 420px; width: 100%;
-}
-.loading-spinner {
-  width: 64px; height: 64px; margin: 0 auto 24px;
-  border: 4px solid rgba(255,255,255,0.2); border-top-color: var(--orange);
-  border-radius: 50%; animation: spin 1s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-title { font-size: 24px; font-weight: 800; color: white; margin-bottom: 8px; }
-.loading-msg { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; }
-.loading-steps { margin-top: 24px; text-align: left; }
-.loading-step {
-  display: flex; align-items: center; gap: 12px; padding: 8px 0;
-  color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.loading-step:last-child { border-bottom: none; }
-.loading-step.done { color: #86EFAC; }
-.loading-step.active { color: white; }
-.step-dot {
-  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 12px;
-  background: rgba(255,255,255,0.15);
-}
-.loading-step.done .step-dot { background: var(--green); }
-.loading-step.active .step-dot { background: var(--orange); animation: pulse 1s ease-in-out infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);
+  padding:18px;margin-bottom:14px;box-shadow:var(--sh)}
+.c-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px;
+  display:flex;align-items:center;gap:7px}
 
-/* ─── LESSON SCREEN ───────────────────────── */
-#screen-lesson { background: var(--bg); }
-.lesson-header {
-  background: white; border-bottom: 1px solid var(--border);
-  padding: 16px 20px; position: sticky; top: 0; z-index: 100;
-  box-shadow: var(--shadow-sm);
-}
-.lesson-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.lesson-title-h { font-size: 18px; font-weight: 800; color: var(--text); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lesson-meta { display: flex; gap: 8px; flex-wrap: wrap; }
-.meta-badge {
-  background: var(--blue-light); color: var(--blue-dark);
-  padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 700;
-}
-.meta-badge.orange { background: var(--orange-light); color: var(--orange-dark); }
+.obj-list{list-style:none}
+.obj-list li{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:14px;line-height:1.6;border-bottom:1px solid var(--border)}
+.obj-list li:last-child{border-bottom:none}
+.obj-list li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0}
 
-/* Tabs */
-.tabs { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 0; scrollbar-width: none; }
-.tabs::-webkit-scrollbar { display: none; }
-.tab-btn {
-  flex-shrink: 0; padding: 8px 16px; border: none; background: none;
-  border-radius: 50px; cursor: pointer; font-size: 13px; font-weight: 700;
-  color: var(--text-muted); transition: all 0.2s; white-space: nowrap;
-  font-family: 'Nunito', sans-serif;
-}
-.tab-btn.active { background: var(--blue); color: white; }
-.tab-btn:hover:not(.active) { background: var(--blue-light); color: var(--blue-dark); }
+.v-grid{display:grid;gap:9px}
+.v-card{background:linear-gradient(135deg,var(--blue-l) 0%,#fff 100%);
+  border:1px solid rgba(14,165,233,.18);border-radius:var(--rs);padding:13px}
+.v-word{font-size:18px;font-weight:800;color:var(--blue-d)}
+.v-ipa{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:5px}
+.v-def{font-size:13px;margin-bottom:3px}
+.v-vn{font-size:12px;color:var(--orange-d);font-weight:700}
+.v-ex{font-size:12px;color:var(--muted);font-style:italic;margin-top:5px;
+  border-left:3px solid var(--blue-m);padding-left:8px}
 
-.tab-content { display: none; padding: 20px; max-width: 780px; margin: 0 auto; width: 100%; }
-.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.gr-box{background:linear-gradient(135deg,#FFF7ED,#fff);border-left:4px solid var(--orange);
+  border-radius:var(--rs);padding:15px;margin-bottom:10px}
+.gr-t{font-size:15px;font-weight:800;color:var(--orange-d);margin-bottom:7px}
+.gr-txt{font-size:14px;line-height:1.7}
+.gr-ex{background:#fff;border:1px solid var(--border);border-radius:8px;
+  padding:7px 11px;margin-bottom:5px;font-size:13px;font-style:italic}
 
-/* Cards */
-.card {
-  background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
-  padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm);
-}
-.card-title {
-  font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.card-title .icon { font-size: 20px; }
+.c-text{font-size:15px;line-height:1.9}
+.c-text p{margin-bottom:10px}
 
-/* Objectives */
-.obj-list { list-style: none; }
-.obj-list li {
-  display: flex; align-items: flex-start; gap: 10px; padding: 6px 0;
-  font-size: 14px; line-height: 1.6; border-bottom: 1px solid var(--border);
-}
-.obj-list li:last-child { border-bottom: none; }
-.obj-list li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.tip-item{display:flex;gap:11px;padding:11px;border-radius:var(--rs);
+  background:var(--orange-l);border:1px solid rgba(249,115,22,.14);margin-bottom:7px}
+.tip-n{background:var(--orange);color:#fff;width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.tip-t{font-size:14px;line-height:1.6;flex:1}
 
-/* Vocabulary */
-.vocab-grid { display: grid; gap: 10px; }
-.vocab-card {
-  background: linear-gradient(135deg, var(--blue-light) 0%, white 100%);
-  border: 1px solid rgba(14,165,233,0.2); border-radius: var(--radius-sm); padding: 14px;
-}
-.vocab-word { font-size: 18px; font-weight: 800; color: var(--blue-dark); }
-.vocab-ipa { font-size: 13px; color: var(--text-muted); font-style: italic; margin-bottom: 6px; }
-.vocab-def { font-size: 13px; color: var(--text); margin-bottom: 4px; }
-.vocab-vn { font-size: 12px; color: var(--orange-dark); font-weight: 700; }
-.vocab-ex { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px; border-left: 3px solid var(--blue-mid); padding-left: 8px; }
+.kn-item{display:flex;gap:11px;padding:11px;border-radius:var(--rs);
+  background:var(--blue-l);border:1px solid rgba(14,165,233,.18);
+  margin-bottom:7px;font-size:14px;line-height:1.6;align-items:flex-start}
 
-/* Grammar */
-.grammar-box {
-  background: linear-gradient(135deg, #FFF7ED, white); border-left: 4px solid var(--orange);
-  border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px;
-}
-.grammar-title { font-size: 15px; font-weight: 800; color: var(--orange-dark); margin-bottom: 8px; }
-.grammar-text { font-size: 14px; line-height: 1.7; color: var(--text); }
-.grammar-examples { margin-top: 10px; }
-.grammar-ex {
-  background: white; border: 1px solid var(--border); border-radius: 8px;
-  padding: 8px 12px; margin-bottom: 6px; font-size: 13px; font-style: italic; color: var(--text);
-}
+.ex-card{background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:18px;margin-bottom:13px}
+.ex-num{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:5px}
+.ex-q{font-size:15px;font-weight:700;margin-bottom:12px;line-height:1.5}
+.ex-opts{display:flex;flex-direction:column;gap:7px}
+.ex-opt{padding:9px 13px;border:2px solid var(--border);border-radius:var(--rs);
+  cursor:pointer;font-size:14px;transition:all .2s;
+  display:flex;align-items:center;gap:9px;background:#fff}
+.ex-opt:hover:not([data-locked]){border-color:var(--blue);background:var(--blue-l)}
+.ex-opt.correct{border-color:var(--green)!important;background:#F0FDF4!important}
+.ex-opt.wrong{border-color:var(--red)!important;background:#FEF2F2!important}
+.ex-opt.show-c{border-color:var(--green)!important;background:#F0FDF4!important}
+.opt-l{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;
+  flex-shrink:0;color:var(--muted);background:#fff}
+.ex-fill input{width:100%;padding:10px 13px;border:2px solid var(--border);
+  border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.ex-fill input:focus{border-color:var(--blue)}
+.ex-xp{margin-top:10px;padding:9px 13px;background:#F0FDF4;
+  border-left:3px solid var(--green);border-radius:6px;font-size:13px;
+  color:#15803D;display:none}
+.ex-xp.show{display:block}
+.chk-btn{margin-top:10px;padding:7px 18px;background:var(--blue);color:#fff;
+  border:none;border-radius:50px;cursor:pointer;font-size:13px;font-weight:700;transition:all .2s}
+.chk-btn:hover{background:var(--blue-d)}
+.chk-btn.done{background:var(--green)}
 
-/* Content */
-.content-text { font-size: 15px; line-height: 1.9; color: var(--text); }
-.content-text h3 { font-size: 16px; color: var(--blue-dark); margin: 16px 0 8px; }
-.content-text p { margin-bottom: 12px; }
+/* Writing / Self-assess */
+.writing-prompt{background:linear-gradient(135deg,#F3E8FF,#fff);
+  border-left:4px solid #A855F7;border-radius:var(--rs);padding:14px;margin-bottom:10px}
+.writing-prompt h4{color:#7E22CE;font-size:15px;margin-bottom:5px}
+.writing-prompt p{font-size:14px;line-height:1.6}
+.w-area{width:100%;min-height:140px;padding:11px;border:2px solid var(--border);
+  border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:14px;resize:vertical;outline:none}
+.w-area:focus{border-color:#A855F7}
+.sa-wrap{background:var(--blue-l);border-radius:var(--rs);padding:14px;margin-top:12px}
+.sa-q{font-size:13px;font-weight:700;margin-bottom:7px}
+.sa-stars{display:flex;gap:7px;margin-bottom:10px}
+.star{font-size:22px;cursor:pointer;opacity:.3;transition:all .2s}
+.star.on{opacity:1}
+.star:hover{transform:scale(1.2)}
 
-/* Tips */
-.tips-list { list-style: none; }
-.tip-item {
-  display: flex; gap: 12px; padding: 12px; border-radius: var(--radius-sm);
-  background: var(--orange-light); border: 1px solid rgba(249,115,22,0.15);
-  margin-bottom: 8px; align-items: flex-start;
-}
-.tip-num {
-  background: var(--orange); color: white; width: 24px; height: 24px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; flex-shrink: 0;
-}
-.tip-text { font-size: 14px; line-height: 1.6; flex: 1; }
+/* ── TEST ── */
+#st{background:var(--bg)}
+.t-hdr{background:linear-gradient(135deg,var(--orange-d),var(--orange));
+  color:#fff;padding:18px 20px;flex-shrink:0}
+.t-hdr-r{display:flex;align-items:center;justify-content:space-between}
+.t-title{font-size:19px;font-weight:800}
+.t-pg-txt{font-size:13px;opacity:.9;font-weight:600}
+.t-timer{background:rgba(255,255,255,.2);border-radius:50px;
+  padding:5px 14px;font-size:15px;font-weight:800;margin-top:10px;
+  display:inline-flex;align-items:center;gap:6px;font-family:monospace}
+.t-pgbar{height:4px;background:rgba(255,255,255,.3);border-radius:50px;margin-top:10px}
+.t-pgfill{height:100%;background:#fff;border-radius:50px;transition:width .5s ease}
 
-/* Keynotes */
-.keynote-item {
-  display: flex; gap: 12px; padding: 12px; border-radius: var(--radius-sm);
-  background: var(--blue-light); border: 1px solid rgba(14,165,233,0.2);
-  margin-bottom: 8px; align-items: flex-start; font-size: 14px; line-height: 1.6;
-}
-.keynote-icon { font-size: 18px; flex-shrink: 0; }
+.t-body{padding:20px;max-width:660px;margin:0 auto}
+.t-qcard{background:var(--card);border-radius:var(--r);border:1px solid var(--border);
+  padding:22px;box-shadow:var(--sh)}
+.t-qtype{font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--orange);font-weight:800;margin-bottom:7px}
+.t-qtxt{font-size:17px;font-weight:700;margin-bottom:18px;line-height:1.6}
+.t-opts{display:flex;flex-direction:column;gap:9px}
+.t-opt{padding:11px 15px;border:2px solid var(--border);border-radius:var(--rs);
+  cursor:pointer;font-size:15px;transition:all .2s;
+  display:flex;align-items:center;gap:11px;background:#fff;font-weight:600}
+.t-opt:hover:not(.locked){border-color:var(--orange);background:var(--orange-l)}
+.t-opt.sel{border-color:var(--orange);background:var(--orange-l)}
+.t-optl{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.t-opt.sel .t-optl{border-color:var(--orange);color:var(--orange)}
+.t-fill input{width:100%;padding:11px 14px;border:2px solid var(--border);
+  border-radius:var(--rs);font-family:'Nunito',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.t-fill input:focus{border-color:var(--orange)}
+.t-tf{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 
-/* Exercises */
-.exercise-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 20px; margin-bottom: 14px;
-}
-.ex-num { font-size: 12px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
-.ex-question { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.5; }
-.ex-options { display: flex; flex-direction: column; gap: 8px; }
-.ex-option {
-  padding: 10px 14px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  cursor: pointer; font-size: 14px; transition: all 0.2s; display: flex; align-items: center; gap: 10px;
-  background: white;
-}
-.ex-option:hover:not(.disabled) { border-color: var(--blue); background: var(--blue-light); }
-.ex-option.selected { border-color: var(--blue); background: var(--blue-light); }
-.ex-option.correct { border-color: var(--green); background: #F0FDF4; }
-.ex-option.wrong { border-color: var(--red); background: #FEF2F2; }
-.ex-option.show-correct { border-color: var(--green); background: #F0FDF4; }
-.opt-letter {
-  width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
-  flex-shrink: 0; color: var(--text-muted); background: white;
-}
-.ex-option.selected .opt-letter { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
-.ex-option.correct .opt-letter { border-color: var(--green); color: var(--green); }
-.ex-option.wrong .opt-letter { border-color: var(--red); color: var(--red); }
-.ex-fill input {
-  width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif; font-size: 15px; outline: none;
-  transition: border-color 0.2s;
-}
-.ex-fill input:focus { border-color: var(--blue); }
-.ex-explanation {
-  margin-top: 12px; padding: 10px 14px; background: #F0FDF4; border-left: 3px solid var(--green);
-  border-radius: 6px; font-size: 13px; color: #15803D; display: none;
-}
-.ex-explanation.show { display: block; }
+.q-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.q-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all .2s}
+.q-dot.ans{background:var(--orange)}
+.q-dot.cur{background:var(--blue);box-shadow:0 0 0 3px rgba(14,165,233,.3)}
 
-.check-btn {
-  margin-top: 12px; padding: 8px 20px; background: var(--blue);
-  color: white; border: none; border-radius: 50px; cursor: pointer;
-  font-size: 13px; font-weight: 700; transition: all 0.2s;
-}
-.check-btn:hover { background: var(--blue-dark); }
-.check-btn.done { background: var(--green); }
+.t-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.btn-nxt{flex:1;background:var(--orange);color:#fff;border:none;border-radius:var(--rs);
+  padding:13px;font-size:16px;font-weight:800;cursor:pointer;transition:all .3s;font-family:'Baloo 2',cursive}
+.btn-nxt:hover{background:var(--orange-d);box-shadow:0 6px 18px rgba(249,115,22,.4)}
+.btn-prv{background:#fff;color:var(--muted);border:2px solid var(--border);
+  border-radius:var(--rs);padding:13px 18px;font-size:14px;
+  font-weight:700;cursor:pointer;transition:all .2s}
+.btn-prv:hover{border-color:var(--orange);color:var(--orange)}
 
-/* ─── TEST SCREEN ────────────────────────── */
-#screen-test { background: var(--bg); }
-.test-header {
-  background: linear-gradient(135deg, var(--orange-dark), var(--orange));
-  color: white; padding: 20px 24px;
-}
-.test-header-row { display: flex; align-items: center; justify-content: space-between; }
-.test-title { font-size: 20px; font-weight: 800; }
-.test-progress-text { font-size: 14px; opacity: 0.9; font-weight: 600; }
-.test-timer {
-  background: rgba(255,255,255,0.2); border-radius: 50px; padding: 6px 16px;
-  font-size: 16px; font-weight: 800; font-family: monospace; margin-top: 12px;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.test-progress-bar { height: 4px; background: rgba(255,255,255,0.3); border-radius: 50px; margin-top: 12px; }
-.test-progress-fill { height: 100%; background: white; border-radius: 50px; transition: width 0.5s ease; }
+/* ── RESULTS ── */
+#sr{background:var(--bg)}
+.r-hdr{background:linear-gradient(135deg,#1E293B,var(--blue-d));
+  padding:26px 22px;color:#fff;text-align:center;flex-shrink:0}
+.r-circle{width:110px;height:110px;margin:0 auto 14px;border-radius:50%;
+  background:#fff;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.r-num{font-size:34px;font-weight:800;line-height:1}
+.r-den{font-size:13px;color:var(--muted);font-weight:600}
+.r-grade{font-size:26px;font-weight:800;margin-bottom:5px}
+.r-msg{font-size:14px;opacity:.88}
 
-.test-body { padding: 24px; max-width: 680px; margin: 0 auto; }
-.test-q-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; box-shadow: var(--shadow-sm); }
-.test-q-type { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); font-weight: 800; margin-bottom: 8px; }
-.test-q-text { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.6; margin-bottom: 20px; }
-.test-options { display: flex; flex-direction: column; gap: 10px; }
-.test-option {
-  padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  cursor: pointer; font-size: 15px; transition: all 0.2s; display: flex; align-items: center;
-  gap: 12px; background: white; font-weight: 600;
-}
-.test-option:hover:not(.locked) { border-color: var(--orange); background: var(--orange-light); }
-.test-option.selected { border-color: var(--orange); background: var(--orange-light); }
-.test-opt-letter {
-  width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center; font-size: 13px;
-  font-weight: 800; flex-shrink: 0; color: var(--text-muted);
-}
-.test-option.selected .test-opt-letter { border-color: var(--orange); color: var(--orange); }
-.test-fill input {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s;
-}
-.test-fill input:focus { border-color: var(--orange); }
-.test-tf-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.r-body{padding:18px;max-width:760px;margin:0 auto}
+.cw{background:var(--card);border-radius:var(--r);border:1px solid var(--border);
+  padding:18px;margin-bottom:14px;box-shadow:var(--sh)}
+.cw-t{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:7px}
 
-.test-nav {
-  display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 12px;
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.bar-lbl{font-size:13px;font-weight:700;min-width:100px;flex-shrink:0}
+@media(max-width:440px){.bar-lbl{min-width:70px;font-size:11px}}
+.bar-bg{flex:1;background:var(--border);border-radius:50px;height:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:50px;transition:width 1.2s ease;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:7px}
+.bar-fill span{font-size:11px;font-weight:800;color:#fff}
+.bar-sc{font-size:13px;font-weight:800;min-width:36px;text-align:right}
+
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:480px){.sw-grid{grid-template-columns:1fr}}
+.sw-card{border-radius:var(--r);padding:15px;border:1px solid}
+.sw-card.str{background:#F0FDF4;border-color:#BBF7D0}
+.sw-card.wk{background:#FEF2F2;border-color:#FECACA}
+.sw-t{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.sw-card.str .sw-t{color:#15803D}
+.sw-card.wk .sw-t{color:#DC2626}
+.sw-i{font-size:13px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.sw-i:last-child{border-bottom:none}
+
+.reco-card{background:linear-gradient(135deg,var(--orange-l),#fff);
+  border:1px solid rgba(249,115,22,.18);border-radius:var(--r);padding:18px;margin-bottom:14px}
+.reco-i{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid rgba(249,115,22,.1);
+  font-size:14px;line-height:1.6;align-items:flex-start}
+.reco-i:last-child{border-bottom:none}
+.reco-ico{font-size:17px;flex-shrink:0}
+
+.rv-table{width:100%;border-collapse:collapse;font-size:13px}
+.rv-table th{background:var(--blue-l);color:var(--blue-d);padding:9px 11px;text-align:left;font-weight:800}
+.rv-table td{padding:9px 11px;border-bottom:1px solid var(--border)}
+.rv-table tr:last-child td{border-bottom:none}
+.ok-b{color:var(--green);font-weight:800}
+.no-b{color:var(--red);font-weight:800}
+
+.hist-item{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.hist-item:last-child{border-bottom:none}
+.h-sc{font-weight:800;padding:3px 9px;border-radius:50px;font-size:12px}
+.h-sc.g{background:#DCFCE7;color:#15803D}
+.h-sc.o{background:#FEF3C7;color:#92400E}
+.h-sc.r{background:#FEE2E2;color:#DC2626}
+
+.restart{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue-d));
+  color:#fff;border:none;border-radius:var(--rs);padding:15px;
+  font-size:17px;font-weight:800;cursor:pointer;transition:all .3s;margin-top:4px;
+  font-family:'Baloo 2',cursive;display:flex;align-items:center;justify-content:center;gap:9px}
+.restart:hover{box-shadow:0 6px 18px rgba(14,165,233,.4)}
+
+.radar-wrap{display:flex;justify-content:center;padding:8px 0}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:#1E293B;color:#fff;padding:11px 22px;border-radius:50px;
+  font-size:14px;font-weight:700;z-index:9999;transition:transform .4s ease;
+  box-shadow:0 8px 22px rgba(0,0,0,.3);white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .t-body,.r-body,.tab-c,.setup-body{padding:14px}
+  .l-hdr{padding:12px 14px}
+  .card,.ex-card,.t-qcard,.cw{padding:14px}
 }
-.btn-next {
-  flex: 1; background: var(--orange); color: white; border: none; border-radius: var(--radius-sm);
-  padding: 14px; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s;
-  font-family: 'Baloo 2', cursive;
-}
-.btn-next:hover { background: var(--orange-dark); box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
-.btn-prev {
-  background: white; color: var(--text-muted); border: 2px solid var(--border);
-  border-radius: var(--radius-sm); padding: 14px 20px; font-size: 15px;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
-}
-.btn-prev:hover { border-color: var(--orange); color: var(--orange); }
-.q-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
-.q-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--border); transition: all 0.2s;
-}
-.q-dot.answered { background: var(--orange); }
-.q-dot.current { background: var(--blue); box-shadow: 0 0 0 3px rgba(14,165,233,0.3); }
-
-/* ─── RESULTS SCREEN ─────────────────────── */
-#screen-results { background: var(--bg); }
-.results-header {
-  background: linear-gradient(135deg, #1E293B, var(--blue-dark));
-  padding: 28px 24px; color: white; text-align: center;
-}
-.results-score-circle {
-  width: 120px; height: 120px; margin: 0 auto 16px;
-  border-radius: 50%; background: white;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-}
-.score-num { font-size: 36px; font-weight: 800; line-height: 1; }
-.score-den { font-size: 14px; color: var(--text-muted); font-weight: 600; }
-.results-grade { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
-.results-msg { font-size: 15px; opacity: 0.9; }
-
-.results-body { padding: 20px; max-width: 780px; margin: 0 auto; }
-.chart-wrap { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
-.chart-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px; }
-canvas { width: 100% !important; }
-
-/* Bar chart items */
-.bar-chart { display: flex; flex-direction: column; gap: 10px; }
-.bar-row { display: flex; align-items: center; gap: 12px; }
-.bar-label { font-size: 13px; font-weight: 700; color: var(--text); min-width: 120px; flex-shrink: 0; }
-@media(max-width: 480px) { .bar-label { min-width: 80px; font-size: 12px; } }
-.bar-bg { flex: 1; background: var(--border); border-radius: 50px; height: 22px; overflow: hidden; position: relative; }
-.bar-fill { height: 100%; border-radius: 50px; transition: width 1s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
-.bar-fill span { font-size: 11px; font-weight: 800; color: white; }
-.bar-score { font-size: 13px; font-weight: 800; color: var(--text); min-width: 40px; text-align: right; }
-
-/* Strengths/Weaknesses */
-.sw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-@media(max-width: 480px) { .sw-grid { grid-template-columns: 1fr; } }
-.sw-card { border-radius: var(--radius); padding: 16px; border: 1px solid; }
-.sw-card.strength { background: #F0FDF4; border-color: #BBF7D0; }
-.sw-card.weakness { background: #FEF2F2; border-color: #FECACA; }
-.sw-title { font-size: 14px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-.sw-card.strength .sw-title { color: #15803D; }
-.sw-card.weakness .sw-title { color: #DC2626; }
-.sw-item { font-size: 13px; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text); }
-.sw-item:last-child { border-bottom: none; }
-
-/* Recommendations */
-.reco-card {
-  background: linear-gradient(135deg, var(--orange-light), white);
-  border: 1px solid rgba(249,115,22,0.2); border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-}
-.reco-item {
-  display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(249,115,22,0.1);
-  font-size: 14px; line-height: 1.6; align-items: flex-start;
-}
-.reco-item:last-child { border-bottom: none; }
-.reco-icon { font-size: 18px; flex-shrink: 0; }
-.reco-text { flex: 1; }
-
-/* History */
-.history-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; }
-.history-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.history-item:last-child { border-bottom: none; }
-.history-topic { font-weight: 700; color: var(--text); }
-.history-score { font-weight: 800; padding: 3px 10px; border-radius: 50px; font-size: 12px; }
-.history-score.good { background: #DCFCE7; color: #15803D; }
-.history-score.ok { background: #FEF3C7; color: #92400E; }
-.history-score.bad { background: #FEE2E2; color: #DC2626; }
-
-.restart-btn {
-  width: 100%; background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-  color: white; border: none; border-radius: var(--radius-sm); padding: 16px;
-  font-size: 17px; font-weight: 800; cursor: pointer; transition: all 0.3s; margin-top: 4px;
-  font-family: 'Baloo 2', cursive; display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.restart-btn:hover { box-shadow: 0 6px 20px rgba(14,165,233,0.4); }
-
-/* Error */
-.error-box {
-  background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius-sm);
-  padding: 16px; color: #DC2626; font-size: 14px; margin-bottom: 16px;
-}
-
-/* Radar Chart */
-.radar-wrap { display: flex; justify-content: center; padding: 10px 0; }
-#radarCanvas { max-width: 300px; max-height: 300px; }
-
-/* Review table in results */
-.review-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.review-table th { background: var(--blue-light); color: var(--blue-dark); padding: 10px 12px; text-align: left; font-weight: 800; }
-.review-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-.review-table tr:last-child td { border-bottom: none; }
-.correct-badge { color: var(--green); font-weight: 800; }
-.wrong-badge { color: var(--red); font-weight: 800; }
-.q-idx { color: var(--text-muted); font-weight: 700; }
-
-/* Toast */
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-  background: #1E293B; color: white; padding: 12px 24px; border-radius: 50px;
-  font-size: 14px; font-weight: 700; z-index: 9999; transition: transform 0.4s ease;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3); white-space: nowrap;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
-
-/* Responsive tweaks */
-@media(max-width: 640px) {
-  .tab-content, .test-body, .results-body, .setup-body { padding: 16px; }
-  .lesson-header { padding: 14px 16px; }
-  .card, .exercise-card { padding: 16px; }
-}
-
-/* Skill icons map */
-.skill-nghe { background: #DBEAFE; color: #1D4ED8; }
-.skill-noi { background: #DCFCE7; color: #15803D; }
-.skill-doc { background: #FEF3C7; color: #92400E; }
-.skill-viet { background: #F3E8FF; color: #7E22CE; }
-.skill-debate { background: #FFF1F2; color: #BE123C; }
-
-/* Self-assessment for speaking/debate */
-.self-assess { background: var(--blue-light); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; }
-.sa-question { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.sa-stars { display: flex; gap: 8px; }
-.sa-star { font-size: 24px; cursor: pointer; transition: transform 0.2s; opacity: 0.3; }
-.sa-star.active { opacity: 1; }
-.sa-star:hover { transform: scale(1.2); }
-
-/* Writing prompt */
-.writing-prompt {
-  background: linear-gradient(135deg, #F3E8FF, white);
-  border-left: 4px solid #A855F7; border-radius: var(--radius-sm);
-  padding: 16px; margin-bottom: 12px;
-}
-.writing-prompt h4 { color: #7E22CE; font-size: 15px; margin-bottom: 6px; }
-.writing-prompt p { font-size: 14px; color: var(--text); line-height: 1.6; }
-.writing-textarea { width: 100%; min-height: 150px; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-family: 'Nunito', sans-serif; font-size: 14px; resize: vertical; outline: none; }
-.writing-textarea:focus { border-color: #A855F7; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════ WELCOME ═══ -->
-<div id="screen-welcome" class="screen active">
-  <span class="welcome-emoji">🎓</span>
-  <div class="welcome-badge">✨ AI-Powered English Learning Platform</div>
-  <h1 class="welcome-logo">English<span>Pro</span></h1>
-  <p class="welcome-sub">Nền tảng học tiếng Anh chuyên sâu<br>cho học sinh chuyên – từ cơ bản đến bản ngữ</p>
-  <div class="welcome-features">
-    <div class="feat-chip">🎧 Nghe</div>
-    <div class="feat-chip">🗣️ Nói</div>
-    <div class="feat-chip">📖 Đọc</div>
-    <div class="feat-chip">✍️ Viết</div>
-    <div class="feat-chip">🏆 Debate</div>
+<!-- ════════════ WELCOME ════════════ -->
+<div id="sw" class="screen active">
+  <span class="w-emoji">🎓</span>
+  <div class="w-badge">✨ AI-Powered English Learning Platform</div>
+  <h1 class="w-logo">English<span>Pro</span></h1>
+  <p class="w-sub">Nền tảng học tiếng Anh chuyên sâu<br>cho học sinh chuyên – từ cơ bản đến bản ngữ</p>
+  <div class="w-chips">
+    <div class="w-chip">🎧 Nghe</div>
+    <div class="w-chip">🗣️ Nói</div>
+    <div class="w-chip">📖 Đọc</div>
+    <div class="w-chip">✍️ Viết</div>
+    <div class="w-chip">🏆 Debate</div>
   </div>
-  <button class="btn-start" onclick="goSetup()">Bắt đầu học ngay <span>→</span></button>
-  <div class="welcome-footer">© 2025 EnglishPro · Dành cho học sinh chuyên Anh cấp 2 & cấp 3</div>
+  <button class="btn-start" id="btn-start-main">Bắt đầu học ngay <span>→</span></button>
+  <div class="w-foot">© 2025 EnglishPro · Dành cho học sinh chuyên Anh cấp 2 &amp; cấp 3</div>
 </div>
 
-<!-- ══════════════════════════════════ SETUP ═══ -->
-<div id="screen-setup" class="screen">
-  <div class="setup-header">
-    <button class="back-btn" onclick="showScreen('welcome')">←</button>
-    <div>
-      <div class="setup-title">Thiết lập buổi học</div>
-    </div>
+<!-- ════════════ SETUP ════════════ -->
+<div id="ss" class="screen">
+  <div class="hdr">
+    <button class="back" id="btn-back-setup">←</button>
+    <div class="hdr-title">Thiết lập buổi học</div>
   </div>
   <div class="setup-body">
-    <!-- Progress -->
-    <div class="step-label" id="step-label">Bước 1 / 3</div>
-    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:33%"></div></div>
+    <div class="slabel" id="slabel">Bước 1 / 3 – Vai trò</div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:33%"></div></div>
 
-    <!-- Step 1: Role -->
+    <!-- Step 1 -->
     <div class="step-panel active" id="step1">
-      <h2 class="step-heading">Bạn là ai? 👋</h2>
-      <p class="step-sub">Chọn vai trò để chúng tôi cá nhân hoá trải nghiệm phù hợp nhất</p>
-      <div class="role-cards">
-        <div class="role-card" onclick="selectRole('student', this)">
-          <span class="role-icon">🧑‍🎓</span>
-          <div class="role-name">Học sinh</div>
-          <div class="role-desc">Luyện tập & kiểm tra kỹ năng</div>
+      <h2 class="sh2">Bạn là ai? 👋</h2>
+      <p class="sp">Chọn vai trò để chúng tôi cá nhân hoá trải nghiệm phù hợp nhất</p>
+      <div class="role-grid">
+        <div class="role-card" data-role="student">
+          <span class="rc-icon">🧑‍🎓</span>
+          <div class="rc-name">Học sinh</div>
+          <div class="rc-desc">Luyện tập & kiểm tra kỹ năng</div>
         </div>
-        <div class="role-card" onclick="selectRole('teacher', this)">
-          <span class="role-icon">👩‍🏫</span>
-          <div class="role-name">Giáo viên</div>
-          <div class="role-desc">Tạo bài học & đánh giá HS</div>
+        <div class="role-card" data-role="teacher">
+          <span class="rc-icon">👩‍🏫</span>
+          <div class="rc-name">Giáo viên</div>
+          <div class="rc-desc">Tạo bài học & đánh giá HS</div>
         </div>
-        <div class="role-card" onclick="selectRole('parent', this)">
-          <span class="role-icon">👨‍👩‍👦</span>
-          <div class="role-name">Phụ huynh</div>
-          <div class="role-desc">Theo dõi tiến độ con em</div>
+        <div class="role-card" data-role="parent">
+          <span class="rc-icon">👨‍👩‍👦</span>
+          <div class="rc-name">Phụ huynh</div>
+          <div class="rc-desc">Theo dõi tiến độ con em</div>
         </div>
       </div>
       <div class="nav-btns">
-        <button class="btn-primary" id="btn-step1-next" onclick="nextStep(2)" disabled>Tiếp theo →</button>
+        <button class="btn-p" id="btn-s1-next" disabled>Tiếp theo →</button>
       </div>
     </div>
 
-    <!-- Step 2: Grade + Level -->
+    <!-- Step 2 -->
     <div class="step-panel" id="step2">
-      <h2 class="step-heading">Thông tin lớp học 📚</h2>
-      <p class="step-sub">Chọn lớp và trình độ hiện tại để AI tạo bài học phù hợp</p>
-      <div class="form-row">
-        <div class="form-group">
+      <h2 class="sh2">Thông tin lớp học 📚</h2>
+      <p class="sp">Chọn lớp và trình độ để AI tạo bài học phù hợp</p>
+      <div class="frow">
+        <div class="fg">
           <label>Lớp học</label>
-          <select id="sel-grade" onchange="updateGrade()">
+          <select id="sel-grade">
             <option value="">-- Chọn lớp --</option>
             <optgroup label="THCS (Cấp 2)">
               <option value="6">Lớp 6</option>
@@ -668,9 +478,9 @@ canvas { width: 100% !important; }
             </optgroup>
           </select>
         </div>
-        <div class="form-group">
+        <div class="fg">
           <label>Trình độ hiện tại</label>
-          <select id="sel-level" onchange="updateLevel()">
+          <select id="sel-level">
             <option value="">-- Chọn trình độ --</option>
             <option value="A1">A1 – Cơ bản (Beginner)</option>
             <option value="A2">A2 – Sơ cấp (Elementary)</option>
@@ -683,947 +493,1038 @@ canvas { width: 100% !important; }
         </div>
       </div>
       <div class="nav-btns">
-        <button class="btn-secondary" onclick="nextStep(1)">← Quay lại</button>
-        <button class="btn-primary" id="btn-step2-next" onclick="nextStep(3)" disabled>Tiếp theo →</button>
+        <button class="btn-s" id="btn-s2-back">← Quay lại</button>
+        <button class="btn-p" id="btn-s2-next" disabled>Tiếp theo →</button>
       </div>
     </div>
 
-    <!-- Step 3: Topic + Skills -->
+    <!-- Step 3 -->
     <div class="step-panel" id="step3">
-      <h2 class="step-heading">Chủ đề & Kỹ năng 🎯</h2>
-      <p class="step-sub">Bạn muốn học gì hôm nay?</p>
-      <div class="form-group" style="margin-bottom:8px">
+      <h2 class="sh2">Chủ đề &amp; Kỹ năng 🎯</h2>
+      <p class="sp">Bạn muốn học gì hôm nay?</p>
+      <div class="fg" style="margin-bottom:8px">
         <label>Chủ đề bài học</label>
-        <input type="text" id="inp-topic" placeholder="VD: Climate Change, Social Media, Education..." oninput="updateTopic()">
+        <input type="text" id="inp-topic" placeholder="VD: Climate Change, Social Media, Technology...">
       </div>
-      <div class="topic-suggestions" id="topic-suggestions">
-        <span class="topic-tag" onclick="setTopic('Climate Change')">🌍 Climate Change</span>
-        <span class="topic-tag" onclick="setTopic('Social Media')">📱 Social Media</span>
-        <span class="topic-tag" onclick="setTopic('Artificial Intelligence')">🤖 Artificial Intelligence</span>
-        <span class="topic-tag" onclick="setTopic('Global Health')">🏥 Global Health</span>
-        <span class="topic-tag" onclick="setTopic('Education System')">📚 Education System</span>
-        <span class="topic-tag" onclick="setTopic('Environment')">♻️ Environment</span>
-        <span class="topic-tag" onclick="setTopic('Technology')">💻 Technology</span>
-        <span class="topic-tag" onclick="setTopic('Culture & Society')">🌐 Culture & Society</span>
+      <div class="t-tags">
+        <span class="t-tag" data-topic="Climate Change">🌍 Climate Change</span>
+        <span class="t-tag" data-topic="Social Media">📱 Social Media</span>
+        <span class="t-tag" data-topic="Artificial Intelligence">🤖 Artificial Intelligence</span>
+        <span class="t-tag" data-topic="Global Health">🏥 Global Health</span>
+        <span class="t-tag" data-topic="Education System">📚 Education System</span>
+        <span class="t-tag" data-topic="Environment">♻️ Environment</span>
+        <span class="t-tag" data-topic="Technology">💻 Technology</span>
+        <span class="t-tag" data-topic="Culture & Society">🌐 Culture &amp; Society</span>
       </div>
-      <div class="form-group" style="margin-top:20px;margin-bottom:8px">
+      <div class="fg" style="margin-top:18px;margin-bottom:8px">
         <label>Kỹ năng muốn luyện (chọn ≥ 1)</label>
       </div>
-      <div class="skill-chips" id="skill-chips">
-        <div class="skill-chip" onclick="toggleSkill('listening', this)" data-skill="listening">🎧 Nghe (Listening)</div>
-        <div class="skill-chip" onclick="toggleSkill('speaking', this)" data-skill="speaking">🗣️ Nói (Speaking)</div>
-        <div class="skill-chip" onclick="toggleSkill('reading', this)" data-skill="reading">📖 Đọc (Reading)</div>
-        <div class="skill-chip" onclick="toggleSkill('writing', this)" data-skill="writing">✍️ Viết (Writing)</div>
-        <div class="skill-chip" onclick="toggleSkill('debate', this)" data-skill="debate">🏆 Tranh luận (Debate)</div>
+      <div class="skill-chips">
+        <div class="s-chip" data-skill="listening">🎧 Nghe</div>
+        <div class="s-chip" data-skill="speaking">🗣️ Nói</div>
+        <div class="s-chip" data-skill="reading">📖 Đọc</div>
+        <div class="s-chip" data-skill="writing">✍️ Viết</div>
+        <div class="s-chip" data-skill="debate">🏆 Debate</div>
       </div>
       <div class="nav-btns">
-        <button class="btn-secondary" onclick="nextStep(2)">← Quay lại</button>
-        <button class="btn-orange" id="btn-generate" onclick="generateLesson()" disabled>🤖 Tạo bài học với AI</button>
+        <button class="btn-s" id="btn-s3-back">← Quay lại</button>
+        <button class="btn-o" id="btn-generate" disabled>🤖 Tạo bài học với AI</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════ LOADING ═══ -->
-<div id="screen-loading" class="screen">
-  <div class="loading-card">
-    <div class="loading-spinner"></div>
-    <div class="loading-title">AI đang tạo bài học...</div>
-    <div class="loading-msg">Vui lòng đợi trong giây lát, chúng tôi đang chuẩn bị nội dung phù hợp với trình độ của bạn.</div>
-    <div class="loading-steps" id="loading-steps">
-      <div class="loading-step active" id="ls1"><div class="step-dot">→</div>Phân tích trình độ & chủ đề</div>
-      <div class="loading-step" id="ls2"><div class="step-dot">2</div>Tạo từ vựng & ngữ pháp</div>
-      <div class="loading-step" id="ls3"><div class="step-dot">3</div>Biên soạn bài học & tips</div>
-      <div class="loading-step" id="ls4"><div class="step-dot">4</div>Tạo bài tập & đề kiểm tra</div>
-      <div class="loading-step" id="ls5"><div class="step-dot">5</div>Hoàn thiện & kiểm tra chất lượng</div>
+<!-- ════════════ API KEY MODAL ════════════ -->
+<div class="modal-overlay" id="api-modal">
+  <div class="modal-box">
+    <div class="modal-title">🔑 Nhập Anthropic API Key</div>
+    <div class="modal-sub">Để sử dụng AI tạo bài học, bạn cần nhập Anthropic API Key. Key được lưu an toàn trên máy bạn (localStorage).</div>
+    <div class="key-badge" id="key-status-badge" style="display:none">
+      ✅ Đã có API Key. Bạn có thể đổi key mới bên dưới.
+    </div>
+    <input class="modal-input" type="password" id="api-key-input" placeholder="sk-ant-api03-...">
+    <div class="modal-btns">
+      <button class="btn-s" id="btn-modal-cancel">Huỷ</button>
+      <button class="btn-p" id="btn-modal-save" style="flex:1">Lưu &amp; Tạo bài học</button>
+    </div>
+    <div class="modal-note">
+      Lấy API Key miễn phí tại <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+      Key chỉ lưu trên thiết bị của bạn, không gửi đi đâu khác ngoài Anthropic API.
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════ LESSON ═══ -->
-<div id="screen-lesson" class="screen">
-  <div class="lesson-header">
-    <div class="lesson-header-top">
-      <button class="back-btn" onclick="showScreen('setup')" style="background:var(--blue-light);color:var(--blue-dark)">←</button>
-      <div class="lesson-title-h" id="lesson-title-h">Bài học</div>
-      <button class="btn-primary" style="flex:0;padding:8px 16px;font-size:13px;border-radius:50px" onclick="goToTest()">📝 Kiểm tra</button>
+<!-- ════════════ LOADING ════════════ -->
+<div id="sl" class="screen">
+  <div class="ld-card">
+    <div class="ld-spin"></div>
+    <div class="ld-title">AI đang tạo bài học...</div>
+    <div class="ld-msg">Vui lòng đợi trong giây lát, chúng tôi đang chuẩn bị nội dung phù hợp.</div>
+    <div class="ld-steps">
+      <div class="ld-step act" id="ls1"><div class="sdot">→</div>Phân tích trình độ &amp; chủ đề</div>
+      <div class="ld-step" id="ls2"><div class="sdot">2</div>Tạo từ vựng &amp; ngữ pháp</div>
+      <div class="ld-step" id="ls3"><div class="sdot">3</div>Biên soạn bài học &amp; tips</div>
+      <div class="ld-step" id="ls4"><div class="sdot">4</div>Tạo bài tập &amp; đề kiểm tra</div>
+      <div class="ld-step" id="ls5"><div class="sdot">5</div>Hoàn thiện nội dung</div>
     </div>
-    <div class="lesson-meta" id="lesson-meta"></div>
-    <div class="tabs" id="lesson-tabs">
-      <button class="tab-btn active" onclick="switchTab(0)">📚 Bài học</button>
-      <button class="tab-btn" onclick="switchTab(1)">💪 Bài tập</button>
-      <button class="tab-btn" onclick="switchTab(2)">💡 Tips & Ghi chú</button>
-      <button class="tab-btn" onclick="switchTab(3)">🎯 Kỹ năng</button>
+  </div>
+</div>
+
+<!-- ════════════ LESSON ════════════ -->
+<div id="sle" class="screen">
+  <div class="l-hdr">
+    <div class="l-hdr-top">
+      <button class="back" id="btn-back-lesson" style="background:var(--blue-l);color:var(--blue-d)">←</button>
+      <div class="l-title" id="l-title">Bài học</div>
+      <button class="btn-o" id="btn-go-test" style="flex:0;padding:8px 14px;font-size:13px;border-radius:50px">📝 Kiểm tra</button>
+    </div>
+    <div class="l-meta" id="l-meta"></div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="0">📚 Bài học</button>
+      <button class="tab-btn" data-tab="1">💪 Bài tập</button>
+      <button class="tab-btn" data-tab="2">💡 Tips &amp; Ghi chú</button>
+      <button class="tab-btn" data-tab="3">🎯 Kỹ năng</button>
     </div>
   </div>
 
-  <!-- Tab 0: Lesson -->
-  <div class="tab-content active" id="tab0">
-    <div class="card" id="objectives-card">
-      <div class="card-title"><span class="icon">🎯</span> Mục tiêu bài học</div>
-      <ul class="obj-list" id="objectives-list"></ul>
+  <div class="tab-c active" id="tab0">
+    <div class="card">
+      <div class="c-title">🎯 Mục tiêu bài học</div>
+      <ul class="obj-list" id="obj-list"></ul>
     </div>
     <div class="card">
-      <div class="card-title"><span class="icon">📖</span> Từ vựng trọng tâm</div>
-      <div class="vocab-grid" id="vocab-grid"></div>
+      <div class="c-title">📖 Từ vựng trọng tâm</div>
+      <div class="v-grid" id="v-grid"></div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="icon">📐</span> Điểm ngữ pháp</div>
-      <div id="grammar-content"></div>
+      <div class="c-title">📐 Điểm ngữ pháp</div>
+      <div id="gr-content"></div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="icon">📄</span> Nội dung bài học</div>
-      <div class="content-text" id="lesson-content-text"></div>
+      <div class="c-title">📄 Nội dung bài học</div>
+      <div class="c-text" id="c-text"></div>
     </div>
   </div>
 
-  <!-- Tab 1: Exercises -->
-  <div class="tab-content" id="tab1">
-    <div id="exercises-container"></div>
+  <div class="tab-c" id="tab1">
+    <div id="ex-container"></div>
   </div>
 
-  <!-- Tab 2: Tips & Keynotes -->
-  <div class="tab-content" id="tab2">
+  <div class="tab-c" id="tab2">
     <div class="card">
-      <div class="card-title"><span class="icon">💡</span> Tips học hiệu quả</div>
-      <ul class="tips-list" id="tips-list"></ul>
+      <div class="c-title">💡 Tips học hiệu quả</div>
+      <div id="tips-list"></div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="icon">📌</span> Ghi chú quan trọng (Keynotes)</div>
-      <div id="keynotes-list"></div>
+      <div class="c-title">📌 Ghi chú quan trọng</div>
+      <div id="kn-list"></div>
     </div>
   </div>
 
-  <!-- Tab 3: Skills -->
-  <div class="tab-content" id="tab3">
+  <div class="tab-c" id="tab3">
     <div id="skills-content"></div>
-    <div style="margin-top:16px">
-      <button class="btn-orange" onclick="goToTest()" style="width:100%;padding:16px;font-size:17px;border-radius:var(--radius-sm)">
-        📝 Bắt đầu bài kiểm tra
-      </button>
-    </div>
+    <button class="btn-o" id="btn-go-test2" style="width:100%;padding:15px;font-size:17px;border-radius:var(--rs);margin-top:8px">
+      📝 Bắt đầu kiểm tra
+    </button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════ TEST ═══ -->
-<div id="screen-test" class="screen">
-  <div class="test-header">
-    <div class="test-header-row">
-      <div class="test-title">📝 Kiểm tra kiến thức</div>
-      <div class="test-progress-text" id="test-prog-text">Câu 1 / 10</div>
+<!-- ════════════ TEST ════════════ -->
+<div id="st" class="screen">
+  <div class="t-hdr">
+    <div class="t-hdr-r">
+      <div class="t-title">📝 Kiểm tra kiến thức</div>
+      <div class="t-pg-txt" id="t-pg-txt">Câu 1 / 10</div>
     </div>
-    <div class="test-timer" id="test-timer">⏱ 00:00</div>
-    <div class="test-progress-bar">
-      <div class="test-progress-fill" id="test-prog-fill" style="width:10%"></div>
-    </div>
+    <div class="t-timer" id="t-timer">⏱ 00:00</div>
+    <div class="t-pgbar"><div class="t-pgfill" id="t-pgfill" style="width:10%"></div></div>
   </div>
-  <div class="test-body">
-    <div class="test-q-card" id="test-q-card">
-      <div class="test-q-type" id="test-q-type">Trắc nghiệm</div>
-      <div class="test-q-text" id="test-q-text"></div>
-      <div id="test-q-body"></div>
+  <div class="t-body">
+    <div class="t-qcard" id="t-qcard">
+      <div class="t-qtype" id="t-qtype">Trắc nghiệm</div>
+      <div class="t-qtxt" id="t-qtxt"></div>
+      <div id="t-qbody"></div>
     </div>
     <div class="q-dots" id="q-dots"></div>
-    <div class="test-nav">
-      <button class="btn-prev" id="btn-prev" onclick="prevQ()" style="display:none">← Trước</button>
-      <button class="btn-next" id="btn-next" onclick="nextQ()">Tiếp →</button>
+    <div class="t-nav">
+      <button class="btn-prv" id="btn-prv" style="display:none">← Trước</button>
+      <button class="btn-nxt" id="btn-nxt">Tiếp →</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════ RESULTS ═══ -->
-<div id="screen-results" class="screen">
-  <div class="results-header">
-    <div class="results-score-circle" id="score-circle">
-      <div class="score-num" id="score-num" style="color:var(--green)">0</div>
-      <div class="score-den" id="score-den">/ 10</div>
+<!-- ════════════ RESULTS ════════════ -->
+<div id="sr" class="screen">
+  <div class="r-hdr">
+    <div class="r-circle">
+      <div class="r-num" id="r-num">0</div>
+      <div class="r-den" id="r-den">/ 10</div>
     </div>
-    <div class="results-grade" id="results-grade">Xuất sắc! 🏆</div>
-    <div class="results-msg" id="results-msg">Tiếp tục phát huy nhé!</div>
+    <div class="r-grade" id="r-grade">Xuất sắc! 🏆</div>
+    <div class="r-msg" id="r-msg">Tiếp tục phát huy nhé!</div>
   </div>
-  <div class="results-body">
-    <!-- Bar Chart -->
-    <div class="chart-wrap">
-      <div class="chart-title">📊 Kết quả theo chủ đề</div>
-      <div class="bar-chart" id="bar-chart"></div>
+  <div class="r-body">
+    <div class="cw">
+      <div class="cw-t">📊 Kết quả theo chủ đề</div>
+      <div id="bar-chart"></div>
     </div>
-
-    <!-- Radar Chart -->
-    <div class="chart-wrap">
-      <div class="chart-title">🕸️ Biểu đồ kỹ năng tổng thể</div>
-      <div class="radar-wrap">
-        <canvas id="radarCanvas" width="300" height="300"></canvas>
-      </div>
+    <div class="cw">
+      <div class="cw-t">🕸️ Biểu đồ kỹ năng</div>
+      <div class="radar-wrap"><canvas id="radar" width="280" height="280"></canvas></div>
     </div>
-
-    <!-- Strengths & Weaknesses -->
     <div class="sw-grid" id="sw-grid"></div>
-
-    <!-- Review Table -->
-    <div class="chart-wrap">
-      <div class="chart-title">📋 Chi tiết câu hỏi</div>
+    <div class="cw">
+      <div class="cw-t">📋 Chi tiết câu hỏi</div>
       <div style="overflow-x:auto">
-        <table class="review-table" id="review-table">
-          <thead><tr><th>#</th><th>Câu hỏi</th><th>Kết quả</th></tr></thead>
-          <tbody id="review-body"></tbody>
+        <table class="rv-table">
+          <thead><tr><th>#</th><th>Câu hỏi</th><th>KQ</th></tr></thead>
+          <tbody id="rv-body"></tbody>
         </table>
       </div>
     </div>
-
-    <!-- Recommendations -->
     <div class="reco-card">
-      <div class="chart-title">🚀 Khuyến nghị cải thiện</div>
+      <div class="cw-t">🚀 Khuyến nghị cải thiện</div>
       <div id="reco-list"></div>
     </div>
-
-    <!-- Session history -->
-    <div class="history-card" id="history-card">
-      <div class="chart-title" style="margin-bottom:10px">📅 Lịch sử các buổi học</div>
-      <div id="history-list"></div>
+    <div class="cw">
+      <div class="cw-t" style="margin-bottom:10px">📅 Lịch sử học</div>
+      <div id="hist-list"></div>
     </div>
-
-    <button class="restart-btn" onclick="restart()">🔄 Bắt đầu buổi học mới</button>
+    <button class="restart" id="btn-restart">🔄 Bắt đầu buổi học mới</button>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════ STATE ═══════════════════
-const state = {
-  role: '',
-  grade: '',
-  level: '',
-  topic: '',
-  skills: [],
-  lesson: null,
-  test: { questions: [], answers: {}, current: 0, startTime: null, timerInterval: null },
-  selfAssess: {},
-  results: null
+// ══════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════
+const S = {
+  role:'', grade:'', level:'', topic:'', skills:[],
+  lesson:null,
+  test:{ qs:[], ans:{}, cur:0, start:null, timer:null },
+  selfAssess:{}
 };
+const SKILL_LBL = {listening:'Nghe',speaking:'Nói',reading:'Đọc',writing:'Viết',debate:'Tranh luận'};
+const SKILL_ICO = {listening:'🎧',speaking:'🗣️',reading:'📖',writing:'✍️',debate:'🏆'};
+const LVL_LBL = {A1:'A1 – Cơ bản',A2:'A2 – Sơ cấp',B1:'B1 – Trung cấp',B2:'B2 – Trên trung cấp',C1:'C1 – Nâng cao',C2:'C2 – Thông thạo',native:'Native-like'};
 
-// ═══════════════════ NAVIGATION ═══════════════════
+// ══════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-function goSetup() { showScreen('setup'); }
-
-// ═══════════════════ SETUP ═══════════════════
-let currentStep = 1;
-
-function selectRole(role, el) {
-  state.role = role;
-  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('btn-step1-next').disabled = false;
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
 }
 
-function updateGrade() {
-  state.grade = document.getElementById('sel-grade').value;
-  checkStep2();
-}
-function updateLevel() {
-  state.level = document.getElementById('sel-level').value;
-  checkStep2();
-}
-function checkStep2() {
-  document.getElementById('btn-step2-next').disabled = !(state.grade && state.level);
+// ══════════════════════════════════════
+//  STEP WIZARD
+// ══════════════════════════════════════
+let curStep = 1;
+function goStep(n) {
+  curStep = n;
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  const labels = ['','Bước 1 / 3 – Vai trò','Bước 2 / 3 – Thông tin','Bước 3 / 3 – Chủ đề & Kỹ năng'];
+  const widths = ['','33%','66%','99%'];
+  document.getElementById('slabel').textContent = labels[n];
+  document.getElementById('prog-fill').style.width = widths[n];
+  window.scrollTo(0,0);
 }
 
-function updateTopic() {
-  state.topic = document.getElementById('inp-topic').value.trim();
-  checkStep3();
-}
-function setTopic(t) {
-  state.topic = t;
-  document.getElementById('inp-topic').value = t;
-  checkStep3();
-}
-function toggleSkill(skill, el) {
-  el.classList.toggle('selected');
-  if (el.classList.contains('selected')) {
-    if (!state.skills.includes(skill)) state.skills.push(skill);
-  } else {
-    state.skills = state.skills.filter(s => s !== skill);
+// ══════════════════════════════════════
+//  WIRE UP EVENTS (run after DOM ready)
+// ══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Welcome → Setup
+  document.getElementById('btn-start-main').addEventListener('click', function() {
+    showScreen('ss');
+    goStep(1);
+  });
+
+  // Setup back → Welcome
+  document.getElementById('btn-back-setup').addEventListener('click', function() {
+    showScreen('sw');
+  });
+
+  // Role cards
+  document.querySelectorAll('.role-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      document.querySelectorAll('.role-card').forEach(c => c.classList.remove('sel'));
+      card.classList.add('sel');
+      S.role = card.dataset.role;
+      document.getElementById('btn-s1-next').disabled = false;
+    });
+  });
+
+  // Step 1 next
+  document.getElementById('btn-s1-next').addEventListener('click', function() { goStep(2); });
+
+  // Step 2 back
+  document.getElementById('btn-s2-back').addEventListener('click', function() { goStep(1); });
+
+  // Grade / Level
+  document.getElementById('sel-grade').addEventListener('change', function() {
+    S.grade = this.value;
+    checkStep2();
+  });
+  document.getElementById('sel-level').addEventListener('change', function() {
+    S.level = this.value;
+    checkStep2();
+  });
+
+  // Step 2 next
+  document.getElementById('btn-s2-next').addEventListener('click', function() { goStep(3); });
+
+  // Step 3 back
+  document.getElementById('btn-s3-back').addEventListener('click', function() { goStep(2); });
+
+  // Topic input
+  document.getElementById('inp-topic').addEventListener('input', function() {
+    S.topic = this.value.trim();
+    checkStep3();
+  });
+
+  // Topic tags
+  document.querySelectorAll('.t-tag').forEach(function(tag) {
+    tag.addEventListener('click', function() {
+      S.topic = tag.dataset.topic;
+      document.getElementById('inp-topic').value = S.topic;
+      checkStep3();
+    });
+  });
+
+  // Skill chips
+  document.querySelectorAll('.s-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chip.classList.toggle('sel');
+      const sk = chip.dataset.skill;
+      if (chip.classList.contains('sel')) {
+        if (!S.skills.includes(sk)) S.skills.push(sk);
+      } else {
+        S.skills = S.skills.filter(s => s !== sk);
+      }
+      checkStep3();
+    });
+  });
+
+  // Generate button
+  document.getElementById('btn-generate').addEventListener('click', function() {
+    openApiModal();
+  });
+
+  // API Modal
+  var savedKey = localStorage.getItem('ep_api_key') || '';
+  if (savedKey) {
+    document.getElementById('api-key-input').value = savedKey;
+    document.getElementById('key-status-badge').style.display = 'flex';
   }
-  checkStep3();
+  document.getElementById('btn-modal-cancel').addEventListener('click', closeApiModal);
+  document.getElementById('btn-modal-save').addEventListener('click', function() {
+    var key = document.getElementById('api-key-input').value.trim();
+    if (!key || !key.startsWith('sk-ant')) {
+      showToast('⚠️ API Key không hợp lệ! Key phải bắt đầu bằng sk-ant...');
+      return;
+    }
+    localStorage.setItem('ep_api_key', key);
+    closeApiModal();
+    generateLesson(key);
+  });
+  document.getElementById('api-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeApiModal();
+  });
+
+  // Lesson back
+  document.getElementById('btn-back-lesson').addEventListener('click', function() {
+    showScreen('ss');
+  });
+
+  // Go to test buttons
+  document.getElementById('btn-go-test').addEventListener('click', goToTest);
+  document.getElementById('btn-go-test2').addEventListener('click', goToTest);
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(btn.dataset.tab);
+      document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i === idx));
+      document.querySelectorAll('.tab-c').forEach((c,i) => c.classList.toggle('active', i === idx));
+      window.scrollTo(0,0);
+    });
+  });
+
+  // Test nav
+  document.getElementById('btn-prv').addEventListener('click', prevQ);
+  document.getElementById('btn-nxt').addEventListener('click', function() {
+    var isLast = S.test.cur === S.test.qs.length - 1;
+    if (isLast) submitTest(); else nextQ();
+  });
+
+  // Restart
+  document.getElementById('btn-restart').addEventListener('click', restartApp);
+
+  // Init history
+  renderHist();
+});
+
+function checkStep2() {
+  document.getElementById('btn-s2-next').disabled = !(S.grade && S.level);
 }
 function checkStep3() {
-  document.getElementById('btn-generate').disabled = !(state.topic && state.skills.length > 0);
+  document.getElementById('btn-generate').disabled = !(S.topic && S.skills.length > 0);
 }
 
-function nextStep(step) {
-  currentStep = step;
-  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
-  const labels = ['', 'Bước 1 / 3 – Vai trò', 'Bước 2 / 3 – Thông tin', 'Bước 3 / 3 – Chủ đề'];
-  const widths = ['', '33%', '66%', '99%'];
-  document.getElementById('step-label').textContent = labels[step];
-  document.getElementById('progress-fill').style.width = widths[step];
+// ══════════════════════════════════════
+//  API MODAL
+// ══════════════════════════════════════
+function openApiModal() {
+  var saved = localStorage.getItem('ep_api_key') || '';
+  if (saved) {
+    document.getElementById('api-key-input').value = saved;
+    document.getElementById('key-status-badge').style.display = 'flex';
+  }
+  document.getElementById('api-modal').classList.add('open');
+}
+function closeApiModal() {
+  document.getElementById('api-modal').classList.remove('open');
 }
 
-// ═══════════════════ SKILL LABELS ═══════════════════
-const skillLabels = { listening: 'Nghe', speaking: 'Nói', reading: 'Đọc', writing: 'Viết', debate: 'Tranh luận' };
-const skillIcons = { listening: '🎧', speaking: '🗣️', reading: '📖', writing: '✍️', debate: '🏆' };
-const levelLabels = { A1: 'A1 – Cơ bản', A2: 'A2 – Sơ cấp', B1: 'B1 – Trung cấp', B2: 'B2 – Trên trung cấp', C1: 'C1 – Nâng cao', C2: 'C2 – Thông thạo', native: 'Native-like' };
-
-// ═══════════════════ GENERATE LESSON ═══════════════════
-async function generateLesson() {
-  showScreen('loading');
+// ══════════════════════════════════════
+//  GENERATE LESSON
+// ══════════════════════════════════════
+async function generateLesson(apiKey) {
+  showScreen('sl');
   animateLoading();
 
-  const skillsStr = state.skills.map(s => skillLabels[s]).join(', ');
-  const prompt = `Bạn là một giáo viên tiếng Anh chuyên nghiệp dạy học sinh chuyên Anh cấp 2 và 3 tại Việt Nam.
+  var skillsStr = S.skills.map(s => SKILL_LBL[s]).join(', ');
 
-Hãy tạo một bài học tiếng Anh hoàn chỉnh với các thông tin sau:
-- Lớp: ${state.grade}
-- Trình độ: ${levelLabels[state.level] || state.level}
-- Chủ đề: ${state.topic}
-- Kỹ năng: ${skillsStr}
-- Vai trò người dùng: ${state.role === 'student' ? 'Học sinh' : state.role === 'teacher' ? 'Giáo viên' : 'Phụ huynh'}
+  // Build skills_content keys safely (no nested template)
+  var scKeys = S.skills.map(function(s) {
+    return '"' + s + '": "Hướng dẫn chi tiết kỹ năng ' + SKILL_LBL[s] + ' liên quan đến chủ đề ' + S.topic + '. Ít nhất 150 từ, bao gồm chiến thuật, bài tập và gợi ý thực hành cụ thể."';
+  }).join(',\n    ');
 
-Trả về CHÍNH XÁC một JSON object (không có markdown, không có text khác) theo cấu trúc sau:
-{
-  "title": "Tiêu đề bài học",
-  "duration": "45 phút",
-  "objectives": ["Mục tiêu 1", "Mục tiêu 2", "Mục tiêu 3", "Mục tiêu 4"],
-  "vocabulary": [
-    {"word": "từ", "ipa": "/phiên âm/", "definition": "definition in English", "vietnamese": "nghĩa tiếng Việt", "example": "Example sentence."},
-    {"word": "từ2", "ipa": "/phiên âm/", "definition": "definition", "vietnamese": "nghĩa", "example": "Example."},
-    {"word": "từ3", "ipa": "/phiên âm/", "definition": "definition", "vietnamese": "nghĩa", "example": "Example."},
-    {"word": "từ4", "ipa": "/phiên âm/", "definition": "definition", "vietnamese": "nghĩa", "example": "Example."},
-    {"word": "từ5", "ipa": "/phiên âm/", "definition": "definition", "vietnamese": "nghĩa", "example": "Example."},
-    {"word": "từ6", "ipa": "/phiên âm/", "definition": "definition", "vietnamese": "nghĩa", "example": "Example."}
-  ],
-  "grammar": {
-    "title": "Tiêu đề điểm ngữ pháp",
-    "explanation": "Giải thích ngữ pháp bằng tiếng Việt và tiếng Anh kết hợp...",
-    "examples": ["Example sentence 1.", "Example sentence 2.", "Example sentence 3."],
-    "note": "Lưu ý quan trọng"
-  },
-  "content": "Nội dung bài học chi tiết (3-4 đoạn, có thể kết hợp tiếng Anh và giải thích tiếng Việt, phù hợp trình độ). Dùng \\n\\n để xuống đoạn.",
-  "tips": ["Tip học hiệu quả 1", "Tip 2", "Tip 3", "Tip 4", "Tip 5"],
-  "keynotes": ["Ghi chú quan trọng 1", "Keynote 2", "Keynote 3", "Keynote 4"],
-  "exercises": [
-    {"type": "mcq", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "A", "explanation": "Giải thích"},
-    {"type": "mcq", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "B", "explanation": "Giải thích"},
-    {"type": "fill", "question": "Fill in: The government should _____ more funds to education.", "answer": "allocate", "explanation": "Giải thích"},
-    {"type": "tf", "question": "True or False: Statement here.", "options": ["True", "False"], "answer": "True", "explanation": "Giải thích"},
-    {"type": "mcq", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "C", "explanation": "Giải thích"}
-  ],
-  "skills_content": {
-    ${state.skills.map(s => `"${s}": "Hướng dẫn chi tiết kỹ năng ${skillLabels[s]} liên quan đến chủ đề, bao gồm các bài tập, chiến thuật và gợi ý thực hành. Ít nhất 150 chữ."`).join(',\n    ')}
-  },
-  "test_questions": [
-    {"type": "mcq", "category": "Từ vựng", "question": "Câu hỏi từ vựng?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "A", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Ngữ pháp", "question": "Câu hỏi ngữ pháp?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "B", "explanation": "Giải thích"},
-    {"type": "tf", "category": "Đọc hiểu", "question": "True or False: ...", "options": ["True", "False"], "answer": "True", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Từ vựng", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "C", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Ngữ pháp", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "D", "explanation": "Giải thích"},
-    {"type": "fill", "category": "Điền từ", "question": "The most effective way to _____ climate change is to reduce emissions.", "answer": "combat", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Từ vựng", "question": "Câu hỏi?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "A", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Đọc hiểu", "question": "Câu hỏi đọc hiểu?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "B", "explanation": "Giải thích"},
-    {"type": "tf", "category": "Ngữ pháp", "question": "True or False: ...", "options": ["True", "False"], "answer": "False", "explanation": "Giải thích"},
-    {"type": "mcq", "category": "Ứng dụng", "question": "Câu hỏi ứng dụng?", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "C", "explanation": "Giải thích"}
-  ],
-  "recommendations": [
-    "Khuyến nghị cải thiện 1 liên quan đến điểm yếu",
-    "Khuyến nghị 2",
-    "Khuyến nghị 3",
-    "Khuyến nghị 4"
-  ]
-}`;
+  var prompt = 'Bạn là giáo viên tiếng Anh chuyên nghiệp dạy học sinh chuyên Anh tại Việt Nam.\n\n'
+    + 'Tạo bài học tiếng Anh hoàn chỉnh:\n'
+    + '- Lớp: ' + S.grade + '\n'
+    + '- Trình độ: ' + (LVL_LBL[S.level] || S.level) + '\n'
+    + '- Chủ đề: ' + S.topic + '\n'
+    + '- Kỹ năng: ' + skillsStr + '\n'
+    + '- Đối tượng: ' + (S.role === 'student' ? 'Học sinh' : S.role === 'teacher' ? 'Giáo viên' : 'Phụ huynh') + '\n\n'
+    + 'Trả về CHỈ một JSON object hợp lệ (không markdown, không text ngoài JSON):\n'
+    + '{\n'
+    + '  "title": "Tiêu đề bài học",\n'
+    + '  "duration": "45 phút",\n'
+    + '  "objectives": ["obj1","obj2","obj3","obj4"],\n'
+    + '  "vocabulary": [\n'
+    + '    {"word":"word1","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."},\n'
+    + '    {"word":"word2","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."},\n'
+    + '    {"word":"word3","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."},\n'
+    + '    {"word":"word4","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."},\n'
+    + '    {"word":"word5","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."},\n'
+    + '    {"word":"word6","ipa":"/ipa/","definition":"def","vietnamese":"nghia","example":"sentence."}\n'
+    + '  ],\n'
+    + '  "grammar": {"title":"Grammar Point","explanation":"Giải thích ngữ pháp...","examples":["ex1","ex2","ex3"],"note":"Lưu ý"},\n'
+    + '  "content": "Nội dung bài học (3-4 đoạn, kết hợp tiếng Anh và giải thích tiếng Việt). Dùng ký tự xuống dòng thực sự.",\n'
+    + '  "tips": ["tip1","tip2","tip3","tip4","tip5"],\n'
+    + '  "keynotes": ["keynote1","keynote2","keynote3","keynote4"],\n'
+    + '  "exercises": [\n'
+    + '    {"type":"mcq","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"A","explanation":"exp"},\n'
+    + '    {"type":"mcq","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"B","explanation":"exp"},\n'
+    + '    {"type":"fill","question":"Fill: The government _____ new policies.","answer":"implemented","explanation":"exp"},\n'
+    + '    {"type":"tf","question":"True or False: Statement.","options":["True","False"],"answer":"True","explanation":"exp"},\n'
+    + '    {"type":"mcq","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"C","explanation":"exp"}\n'
+    + '  ],\n'
+    + '  "skills_content": {\n    ' + scKeys + '\n  },\n'
+    + '  "test_questions": [\n'
+    + '    {"type":"mcq","category":"Tu vung","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"A","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Ngu phap","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"B","explanation":"exp"},\n'
+    + '    {"type":"tf","category":"Doc hieu","question":"True or False: Statement.","options":["True","False"],"answer":"True","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Tu vung","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"C","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Ngu phap","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"D","explanation":"exp"},\n'
+    + '    {"type":"fill","category":"Dien tu","question":"The main challenge is to _____ this issue effectively.","answer":"address","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Tu vung","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"A","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Doc hieu","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"B","explanation":"exp"},\n'
+    + '    {"type":"tf","category":"Ngu phap","question":"True or False: Statement.","options":["True","False"],"answer":"False","explanation":"exp"},\n'
+    + '    {"type":"mcq","category":"Ung dung","question":"Q?","options":["A. ..","B. ..","C. ..","D. .."],"answer":"C","explanation":"exp"}\n'
+    + '  ],\n'
+    + '  "recommendations": ["rec1","rec2","rec3","rec4"]\n'
+    + '}';
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
 
-    const text = data.content.map(b => b.text || '').join('');
-    let jsonStr = text.trim();
-    // Strip markdown fences if present
-    jsonStr = jsonStr.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
-    const lesson = JSON.parse(jsonStr);
-    state.lesson = lesson;
+    var data = await res.json();
+    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+
+    var text = (data.content || []).map(function(b){ return b.text || ''; }).join('');
+    var clean = text.trim().replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
+    var lesson = JSON.parse(clean);
+    S.lesson = lesson;
     renderLesson(lesson);
-    showScreen('lesson');
-  } catch (err) {
-    console.error(err);
-    showScreen('setup');
-    showToast('❌ Lỗi tạo bài học: ' + err.message.substring(0, 60));
+    showScreen('sle');
+  } catch(err) {
+    console.error('API error:', err);
+    showScreen('ss');
+    showToast('❌ Lỗi: ' + (err.message || 'Không thể kết nối API').substring(0,80));
   }
 }
 
 function animateLoading() {
-  const steps = [1,2,3,4,5];
-  let i = 0;
-  const interval = setInterval(() => {
-    if (i > 0) {
-      const prev = document.getElementById('ls' + i);
-      if (prev) { prev.classList.remove('active'); prev.classList.add('done'); prev.querySelector('.step-dot').textContent = '✓'; }
+  // Reset all steps
+  for (var i = 1; i <= 5; i++) {
+    var el = document.getElementById('ls' + i);
+    if (el) {
+      el.classList.remove('act','done');
+      el.querySelector('.sdot').textContent = i;
     }
-    i++;
-    if (i <= 5) {
-      const cur = document.getElementById('ls' + i);
-      if (cur) cur.classList.add('active');
+  }
+  document.getElementById('ls1').classList.add('act');
+  var step = 1;
+  var iv = setInterval(function() {
+    var prev = document.getElementById('ls' + step);
+    if (prev) { prev.classList.remove('act'); prev.classList.add('done'); prev.querySelector('.sdot').textContent = '✓'; }
+    step++;
+    if (step <= 5) {
+      var cur = document.getElementById('ls' + step);
+      if (cur) cur.classList.add('act');
     } else {
-      clearInterval(interval);
+      clearInterval(iv);
     }
-  }, 900);
+  }, 1000);
 }
 
-// ═══════════════════ RENDER LESSON ═══════════════════
-let activeTab = 0;
-function switchTab(idx) {
-  activeTab = idx;
-  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-  document.querySelectorAll('.tab-content').forEach((t, i) => t.classList.toggle('active', i === idx));
-  window.scrollTo(0, 0);
-}
-
+// ══════════════════════════════════════
+//  RENDER LESSON
+// ══════════════════════════════════════
 function renderLesson(l) {
-  document.getElementById('lesson-title-h').textContent = l.title || 'Bài học';
-  // Meta badges
-  const meta = document.getElementById('lesson-meta');
-  meta.innerHTML = `
-    <span class="meta-badge">Lớp ${state.grade}</span>
-    <span class="meta-badge">${levelLabels[state.level] || state.level}</span>
-    <span class="meta-badge orange">${state.topic}</span>
-    ${state.skills.map(s => `<span class="meta-badge orange">${skillIcons[s]} ${skillLabels[s]}</span>`).join('')}
-  `;
+  // Title
+  document.getElementById('l-title').textContent = l.title || 'Bài học';
+
+  // Meta
+  var meta = document.getElementById('l-meta');
+  var metaHTML = '<span class="mbadge">Lớp ' + S.grade + '</span>'
+    + '<span class="mbadge">' + (LVL_LBL[S.level] || S.level) + '</span>'
+    + '<span class="mbadge or">' + S.topic + '</span>';
+  S.skills.forEach(function(sk) {
+    metaHTML += '<span class="mbadge or">' + SKILL_ICO[sk] + ' ' + SKILL_LBL[sk] + '</span>';
+  });
+  meta.innerHTML = metaHTML;
 
   // Objectives
-  const objList = document.getElementById('objectives-list');
-  objList.innerHTML = (l.objectives || []).map(o => `<li>${o}</li>`).join('');
+  document.getElementById('obj-list').innerHTML = (l.objectives || []).map(function(o) {
+    return '<li>' + esc(o) + '</li>';
+  }).join('');
 
   // Vocabulary
-  const vocabGrid = document.getElementById('vocab-grid');
-  vocabGrid.innerHTML = (l.vocabulary || []).map(v => `
-    <div class="vocab-card">
-      <div class="vocab-word">${v.word}</div>
-      <div class="vocab-ipa">${v.ipa || ''}</div>
-      <div class="vocab-def">${v.definition}</div>
-      <div class="vocab-vn">🇻🇳 ${v.vietnamese}</div>
-      ${v.example ? `<div class="vocab-ex">${v.example}</div>` : ''}
-    </div>
-  `).join('');
+  document.getElementById('v-grid').innerHTML = (l.vocabulary || []).map(function(v) {
+    return '<div class="v-card">'
+      + '<div class="v-word">' + esc(v.word) + '</div>'
+      + '<div class="v-ipa">' + esc(v.ipa || '') + '</div>'
+      + '<div class="v-def">' + esc(v.definition || '') + '</div>'
+      + '<div class="v-vn">🇻🇳 ' + esc(v.vietnamese || '') + '</div>'
+      + (v.example ? '<div class="v-ex">' + esc(v.example) + '</div>' : '')
+      + '</div>';
+  }).join('');
 
   // Grammar
-  const g = l.grammar || {};
-  document.getElementById('grammar-content').innerHTML = `
-    <div class="grammar-box">
-      <div class="grammar-title">${g.title || ''}</div>
-      <div class="grammar-text">${(g.explanation || '').replace(/\n/g,'<br>')}</div>
-      <div class="grammar-examples">${(g.examples || []).map(e => `<div class="grammar-ex">• ${e}</div>`).join('')}</div>
-      ${g.note ? `<div style="margin-top:8px;font-size:13px;color:var(--orange-dark);font-weight:700;">⚠️ ${g.note}</div>` : ''}
-    </div>`;
+  var g = l.grammar || {};
+  document.getElementById('gr-content').innerHTML = '<div class="gr-box">'
+    + '<div class="gr-t">' + esc(g.title || '') + '</div>'
+    + '<div class="gr-txt">' + esc(g.explanation || '').replace(/\n/g,'<br>') + '</div>'
+    + '<div style="margin-top:10px">' + (g.examples || []).map(function(e){ return '<div class="gr-ex">• ' + esc(e) + '</div>'; }).join('') + '</div>'
+    + (g.note ? '<div style="margin-top:8px;font-size:13px;color:var(--orange-d);font-weight:700">⚠️ ' + esc(g.note) + '</div>' : '')
+    + '</div>';
 
   // Content
-  document.getElementById('lesson-content-text').innerHTML = (l.content || '').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  document.getElementById('c-text').innerHTML = esc(l.content || '').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
 
   // Exercises
   renderExercises(l.exercises || []);
 
   // Tips
-  document.getElementById('tips-list').innerHTML = (l.tips || []).map((t, i) => `
-    <li class="tip-item"><div class="tip-num">${i+1}</div><div class="tip-text">${t}</div></li>`).join('');
+  document.getElementById('tips-list').innerHTML = (l.tips || []).map(function(t, i) {
+    return '<div class="tip-item"><div class="tip-n">' + (i+1) + '</div><div class="tip-t">' + esc(t) + '</div></div>';
+  }).join('');
 
   // Keynotes
-  document.getElementById('keynotes-list').innerHTML = (l.keynotes || []).map(k => `
-    <div class="keynote-item"><span class="keynote-icon">📌</span><span>${k}</span></div>`).join('');
+  document.getElementById('kn-list').innerHTML = (l.keynotes || []).map(function(k) {
+    return '<div class="kn-item"><span style="font-size:17px;flex-shrink:0">📌</span><span>' + esc(k) + '</span></div>';
+  }).join('');
 
-  // Skills content
-  renderSkillsContent(l.skills_content || {});
+  // Skills
+  renderSkills(l.skills_content || {});
 
-  switchTab(0);
+  // Reset tabs
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){ b.classList.toggle('active', i===0); });
+  document.querySelectorAll('.tab-c').forEach(function(c,i){ c.classList.toggle('active', i===0); });
 }
 
 function renderExercises(exercises) {
-  const cont = document.getElementById('exercises-container');
+  var cont = document.getElementById('ex-container');
   if (!exercises.length) { cont.innerHTML = '<div class="card">Chưa có bài tập.</div>'; return; }
-  cont.innerHTML = exercises.map((ex, i) => {
+  cont.innerHTML = exercises.map(function(ex, i) {
     if (ex.type === 'mcq' || ex.type === 'tf') {
-      return `<div class="exercise-card" id="exc${i}">
-        <div class="ex-num">Bài tập ${i+1} · ${ex.type === 'tf' ? 'Đúng/Sai' : 'Trắc nghiệm'}</div>
-        <div class="ex-question">${ex.question}</div>
-        <div class="ex-options">
-          ${(ex.options||[]).map((opt, j) => {
-            const letters = ['A','B','C','D'];
-            return `<div class="ex-option" onclick="checkExercise(${i}, '${letters[j]}', '${ex.answer}', this)" data-val="${letters[j]}">
-              <div class="opt-letter">${letters[j]}</div><span>${opt}</span>
-            </div>`;
-          }).join('')}
-        </div>
-        <div class="ex-explanation" id="exexp${i}">✅ ${ex.explanation || ''}</div>
-      </div>`;
+      var letters = ['A','B','C','D'];
+      var optsHTML = (ex.options || []).map(function(opt, j) {
+        var letter = ex.type === 'tf' ? opt : letters[j];
+        var val = ex.type === 'tf' ? opt : letters[j];
+        return '<div class="ex-opt" data-val="' + esc(val) + '" data-correct="' + esc(ex.answer) + '" data-idx="' + i + '">'
+          + '<div class="opt-l">' + letter.charAt(0) + '</div>'
+          + '<span>' + esc(opt) + '</span>'
+          + '</div>';
+      }).join('');
+      return '<div class="ex-card" id="exc' + i + '">'
+        + '<div class="ex-num">Bài tập ' + (i+1) + ' · ' + (ex.type==='tf'?'Đúng/Sai':'Trắc nghiệm') + '</div>'
+        + '<div class="ex-q">' + esc(ex.question) + '</div>'
+        + '<div class="ex-opts" id="exopts' + i + '">' + optsHTML + '</div>'
+        + '<div class="ex-xp" id="exxp' + i + '">✅ ' + esc(ex.explanation || '') + '</div>'
+        + '</div>';
     } else if (ex.type === 'fill') {
-      return `<div class="exercise-card" id="exc${i}">
-        <div class="ex-num">Bài tập ${i+1} · Điền từ</div>
-        <div class="ex-question">${ex.question}</div>
-        <div class="ex-fill"><input type="text" id="fill${i}" placeholder="Nhập câu trả lời..." onkeydown="if(event.key==='Enter')checkFill(${i},'${ex.answer}')"></div>
-        <button class="check-btn" onclick="checkFill(${i},'${ex.answer}')">Kiểm tra</button>
-        <div class="ex-explanation" id="exexp${i}">✅ ${ex.explanation || ''} Đáp án: <strong>${ex.answer}</strong></div>
-      </div>`;
+      return '<div class="ex-card" id="exc' + i + '">'
+        + '<div class="ex-num">Bài tập ' + (i+1) + ' · Điền từ</div>'
+        + '<div class="ex-q">' + esc(ex.question) + '</div>'
+        + '<div class="ex-fill"><input type="text" id="fill' + i + '" placeholder="Nhập câu trả lời..."></div>'
+        + '<button class="chk-btn" data-idx="' + i + '" data-ans="' + esc(ex.answer) + '">Kiểm tra</button>'
+        + '<div class="ex-xp" id="exxp' + i + '">✅ ' + esc(ex.explanation || '') + ' Đáp án: <strong>' + esc(ex.answer) + '</strong></div>'
+        + '</div>';
     }
     return '';
   }).join('');
-}
 
-function checkExercise(idx, chosen, correct, el) {
-  const card = document.getElementById('exc' + idx);
-  if (card.querySelector('.ex-option.correct, .ex-option.wrong')) return;
-  const opts = card.querySelectorAll('.ex-option');
-  opts.forEach(o => {
-    o.classList.add('disabled');
-    o.style.cursor = 'default';
-    if (o.dataset.val === correct) o.classList.add(chosen === correct ? 'correct' : 'show-correct');
+  // Bind exercise events
+  document.querySelectorAll('#ex-container .ex-opt').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var idx = parseInt(opt.dataset.idx);
+      var val = opt.dataset.val;
+      var correct = opt.dataset.correct;
+      var card = document.getElementById('exc' + idx);
+      if (card.querySelector('.ex-opt.correct, .ex-opt.wrong')) return;
+      var allOpts = card.querySelectorAll('.ex-opt');
+      allOpts.forEach(function(o) {
+        o.setAttribute('data-locked','1');
+        if (o.dataset.val === correct) {
+          o.classList.add(val === correct ? 'correct' : 'show-c');
+        }
+      });
+      opt.classList.add(val === correct ? 'correct' : 'wrong');
+      document.getElementById('exxp' + idx).classList.add('show');
+    });
   });
-  el.classList.add(chosen === correct ? 'correct' : 'wrong');
-  document.getElementById('exexp' + idx).classList.add('show');
+  document.querySelectorAll('#ex-container .chk-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(btn.dataset.idx);
+      var correct = btn.dataset.ans.toLowerCase();
+      var inp = document.getElementById('fill' + idx);
+      if (inp.disabled) return;
+      var val = inp.value.trim().toLowerCase();
+      inp.style.borderColor = val === correct ? 'var(--green)' : 'var(--red)';
+      inp.disabled = true;
+      btn.classList.add('done');
+      btn.textContent = val === correct ? '✓ Đúng!' : '✗ Sai';
+      document.getElementById('exxp' + idx).classList.add('show');
+    });
+  });
 }
 
-function checkFill(idx, correct) {
-  const inp = document.getElementById('fill' + idx);
-  const val = inp.value.trim().toLowerCase();
-  const corr = correct.toLowerCase();
-  inp.style.borderColor = val === corr ? 'var(--green)' : 'var(--red)';
-  inp.disabled = true;
-  document.getElementById('exexp' + idx).classList.add('show');
-  document.querySelector(`#exc${idx} .check-btn`).classList.add('done');
-  document.querySelector(`#exc${idx} .check-btn`).textContent = val === corr ? '✓ Đúng!' : '✗ Sai';
-}
-
-function renderSkillsContent(sc) {
-  const cont = document.getElementById('skills-content');
-  cont.innerHTML = state.skills.map(skill => {
-    const content = sc[skill] || '';
-    if (skill === 'writing') {
-      return `<div class="card">
-        <div class="card-title">${skillIcons[skill]} Kỹ năng ${skillLabels[skill]}</div>
-        <div class="writing-prompt">
-          <h4>✍️ Hướng dẫn & Prompt</h4>
-          <p>${content.replace(/\n/g, '<br>')}</p>
-        </div>
-        <textarea class="writing-textarea" placeholder="Viết bài của bạn ở đây..."></textarea>
-      </div>`;
+function renderSkills(sc) {
+  document.getElementById('skills-content').innerHTML = S.skills.map(function(sk) {
+    var content = sc[sk] || '';
+    if (sk === 'writing') {
+      return '<div class="card">'
+        + '<div class="c-title">' + SKILL_ICO[sk] + ' Kỹ năng ' + SKILL_LBL[sk] + '</div>'
+        + '<div class="writing-prompt"><h4>✍️ Hướng dẫn &amp; Prompt</h4><p>' + esc(content).replace(/\n/g,'<br>') + '</p></div>'
+        + '<textarea class="w-area" placeholder="Viết bài của bạn ở đây..."></textarea>'
+        + '</div>';
     }
-    if (skill === 'speaking' || skill === 'debate') {
-      return `<div class="card">
-        <div class="card-title">${skillIcons[skill]} Kỹ năng ${skillLabels[skill]}</div>
-        <div class="content-text" style="margin-bottom:16px">${content.replace(/\n/g, '<br>')}</div>
-        <div class="self-assess">
-          <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:12px">Tự đánh giá kỹ năng của bạn</div>
-          ${['Phát âm & Ngữ điệu', 'Vốn từ vựng', 'Sự lưu loát', 'Nội dung & Logic', 'Sự tự tin'].map((q, qi) => `
-            <div class="sa-question">${q}</div>
-            <div class="sa-stars" data-q="${skill}-${qi}">
-              ${[1,2,3,4,5].map(n => `<span class="sa-star" onclick="rateSelf('${skill}-${qi}',${n},this)">⭐</span>`).join('')}
-            </div>
-          `).join('')}
-        </div>
-      </div>`;
+    if (sk === 'speaking' || sk === 'debate') {
+      var questions = ['Phát âm & Ngữ điệu','Vốn từ vựng','Sự lưu loát','Nội dung & Logic','Sự tự tin'];
+      var saHTML = questions.map(function(q, qi) {
+        var stars = [1,2,3,4,5].map(function(n) {
+          return '<span class="star" data-n="' + n + '" data-key="' + sk + '-' + qi + '">⭐</span>';
+        }).join('');
+        return '<div class="sa-q">' + esc(q) + '</div><div class="sa-stars" id="sa-' + sk + '-' + qi + '">' + stars + '</div>';
+      }).join('');
+      return '<div class="card">'
+        + '<div class="c-title">' + SKILL_ICO[sk] + ' Kỹ năng ' + SKILL_LBL[sk] + '</div>'
+        + '<div class="c-text" style="margin-bottom:14px">' + esc(content).replace(/\n/g,'<br>') + '</div>'
+        + '<div class="sa-wrap"><div style="font-size:14px;font-weight:800;margin-bottom:10px">Tự đánh giá</div>' + saHTML + '</div>'
+        + '</div>';
     }
-    return `<div class="card">
-      <div class="card-title">${skillIcons[skill]} Kỹ năng ${skillLabels[skill]}</div>
-      <div class="content-text">${content.replace(/\n/g, '<br>')}</div>
-    </div>`;
+    return '<div class="card">'
+      + '<div class="c-title">' + SKILL_ICO[sk] + ' Kỹ năng ' + SKILL_LBL[sk] + '</div>'
+      + '<div class="c-text">' + esc(content).replace(/\n/g,'<br>') + '</div>'
+      + '</div>';
   }).join('');
+
+  // Star events
+  document.querySelectorAll('#skills-content .star').forEach(function(star) {
+    star.addEventListener('click', function() {
+      var key = star.dataset.key;
+      var n = parseInt(star.dataset.n);
+      S.selfAssess[key] = n;
+      var container = star.closest('.sa-stars');
+      container.querySelectorAll('.star').forEach(function(s, i) { s.classList.toggle('on', i < n); });
+    });
+  });
 }
 
-function rateSelf(key, val, el) {
-  state.selfAssess[key] = val;
-  const container = el.closest('.sa-stars');
-  container.querySelectorAll('.sa-star').forEach((s, i) => s.classList.toggle('active', i < val));
-}
-
-// ═══════════════════ TEST ═══════════════════
+// ══════════════════════════════════════
+//  TEST
+// ══════════════════════════════════════
 function goToTest() {
-  if (!state.lesson || !state.lesson.test_questions) { showToast('⚠️ Chưa có bài kiểm tra'); return; }
-  state.test.questions = state.lesson.test_questions;
-  state.test.answers = {};
-  state.test.current = 0;
-  state.test.startTime = Date.now();
-  if (state.test.timerInterval) clearInterval(state.test.timerInterval);
-  state.test.timerInterval = setInterval(updateTimer, 1000);
+  if (!S.lesson || !S.lesson.test_questions || !S.lesson.test_questions.length) {
+    showToast('⚠️ Chưa có bài kiểm tra – hãy tạo bài học trước!');
+    return;
+  }
+  S.test.qs = S.lesson.test_questions;
+  S.test.ans = {};
+  S.test.cur = 0;
+  S.test.start = Date.now();
+  if (S.test.timer) clearInterval(S.test.timer);
+  S.test.timer = setInterval(updateTimer, 1000);
   renderDots();
-  renderQuestion(0);
-  showScreen('test');
+  renderQ(0);
+  showScreen('st');
 }
 
 function updateTimer() {
-  const elapsed = Math.floor((Date.now() - state.test.startTime) / 1000);
-  const m = String(Math.floor(elapsed / 60)).padStart(2,'0');
-  const s = String(elapsed % 60).padStart(2,'0');
-  const el = document.getElementById('test-timer');
-  if (el) el.innerHTML = `⏱ ${m}:${s}`;
+  var el = document.getElementById('t-timer');
+  if (!el) return;
+  var sec = Math.floor((Date.now() - S.test.start) / 1000);
+  var m = String(Math.floor(sec/60)).padStart(2,'0');
+  var s = String(sec%60).padStart(2,'0');
+  el.innerHTML = '⏱ ' + m + ':' + s;
 }
 
 function renderDots() {
-  const qs = state.test.questions;
-  document.getElementById('q-dots').innerHTML = qs.map((_, i) =>
-    `<div class="q-dot${i === state.test.current ? ' current' : ''}${state.test.answers[i] !== undefined ? ' answered' : ''}" id="qdot${i}"></div>`
-  ).join('');
+  var qs = S.test.qs;
+  document.getElementById('q-dots').innerHTML = qs.map(function(_, i) {
+    var cls = 'q-dot';
+    if (i === S.test.cur) cls += ' cur';
+    else if (S.test.ans[i] !== undefined) cls += ' ans';
+    return '<div class="' + cls + '" id="qdot' + i + '"></div>';
+  }).join('');
 }
 
-function renderQuestion(idx) {
-  const q = state.test.questions[idx];
-  const total = state.test.questions.length;
-  document.getElementById('test-prog-text').textContent = `Câu ${idx+1} / ${total}`;
-  document.getElementById('test-prog-fill').style.width = ((idx+1) / total * 100) + '%';
+function renderQ(idx) {
+  var q = S.test.qs[idx];
+  var total = S.test.qs.length;
+  document.getElementById('t-pg-txt').textContent = 'Câu ' + (idx+1) + ' / ' + total;
+  document.getElementById('t-pgfill').style.width = ((idx+1)/total*100) + '%';
 
-  const typeLabel = { mcq: 'Trắc nghiệm', fill: 'Điền từ', tf: 'Đúng / Sai' };
-  document.getElementById('test-q-type').textContent = `${q.category || ''} · ${typeLabel[q.type] || ''}`;
-  document.getElementById('test-q-text').textContent = q.question;
+  var typeMap = {mcq:'Trắc nghiệm',fill:'Điền từ',tf:'Đúng / Sai'};
+  document.getElementById('t-qtype').textContent = (q.category||'') + ' · ' + (typeMap[q.type]||'');
+  document.getElementById('t-qtxt').textContent = q.question;
 
-  const body = document.getElementById('test-q-body');
-  const saved = state.test.answers[idx];
+  var body = document.getElementById('t-qbody');
+  var saved = S.test.ans[idx];
+  var letters = ['A','B','C','D'];
 
   if (q.type === 'mcq' || q.type === 'tf') {
-    body.innerHTML = `<div class="test-options">
-      ${(q.options||[]).map((opt, j) => {
-        const letters = ['A','B','C','D'];
-        const l = q.type === 'tf' ? opt : letters[j];
-        const val = q.type === 'tf' ? opt : l;
-        const isSel = saved === val;
-        return `<div class="test-option${isSel ? ' selected' : ''}" onclick="selectAnswer(${idx}, '${val}', this)" data-val="${val}">
-          <div class="test-opt-letter${isSel ? ' sel' : ''}">${q.type === 'tf' ? (j===0?'✓':'✗') : letters[j]}</div>
-          <span>${opt}</span>
-        </div>`;
-      }).join('')}
-    </div>`;
+    body.innerHTML = '<div class="t-opts">'
+      + (q.options || []).map(function(opt, j) {
+        var val = q.type === 'tf' ? opt : letters[j];
+        var isSel = saved === val;
+        return '<div class="t-opt' + (isSel?' sel':'') + '" data-val="' + esc(val) + '" data-tidx="' + idx + '">'
+          + '<div class="t-optl">' + (q.type==='tf' ? (j===0?'✓':'✗') : letters[j]) + '</div>'
+          + '<span>' + esc(opt) + '</span>'
+          + '</div>';
+      }).join('')
+      + '</div>';
+    body.querySelectorAll('.t-opt').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        var val = opt.dataset.val;
+        var tidx = parseInt(opt.dataset.tidx);
+        S.test.ans[tidx] = val;
+        body.querySelectorAll('.t-opt').forEach(function(o){ o.classList.remove('sel'); o.querySelector('.t-optl').style.borderColor=''; o.querySelector('.t-optl').style.color=''; });
+        opt.classList.add('sel');
+        // Update dot
+        var dot = document.getElementById('qdot' + tidx);
+        if (dot) { dot.classList.remove('cur'); dot.classList.add('ans'); }
+      });
+    });
   } else if (q.type === 'fill') {
-    body.innerHTML = `<div class="test-fill">
-      <input type="text" id="fill-ans" placeholder="Nhập câu trả lời..." value="${saved || ''}" oninput="state.test.answers[${idx}]=this.value">
-    </div>`;
+    body.innerHTML = '<div class="t-fill"><input type="text" id="t-fill-inp" placeholder="Nhập câu trả lời..." value="' + esc(saved||'') + '"></div>';
+    document.getElementById('t-fill-inp').addEventListener('input', function() {
+      S.test.ans[idx] = this.value;
+    });
   }
 
-  // Nav buttons
-  document.getElementById('btn-prev').style.display = idx > 0 ? 'block' : 'none';
-  const isLast = idx === total - 1;
-  const nextBtn = document.getElementById('btn-next');
-  nextBtn.textContent = isLast ? '✅ Nộp bài' : 'Tiếp →';
-  nextBtn.onclick = isLast ? submitTest : nextQ;
-
-  renderDots();
-}
-
-function selectAnswer(idx, val, el) {
-  state.test.answers[idx] = val;
-  document.querySelectorAll('.test-option').forEach(o => { o.classList.remove('selected'); o.querySelector('.test-opt-letter')?.classList.remove('sel'); });
-  el.classList.add('selected');
-  el.querySelector('.test-opt-letter')?.classList.add('sel');
-  // Update dot
-  const dot = document.getElementById('qdot' + idx);
-  if (dot) dot.classList.add('answered');
+  // Nav
+  document.getElementById('btn-prv').style.display = idx > 0 ? 'block' : 'none';
+  var isLast = idx === total - 1;
+  document.getElementById('btn-nxt').textContent = isLast ? '✅ Nộp bài' : 'Tiếp →';
 }
 
 function nextQ() {
-  const idx = state.test.current;
-  const q = state.test.questions[idx];
-  if (q.type === 'fill') {
-    const inp = document.getElementById('fill-ans');
-    if (inp) state.test.answers[idx] = inp.value.trim();
-  }
-  if (idx < state.test.questions.length - 1) {
-    state.test.current++;
-    renderQuestion(state.test.current);
+  saveFill();
+  if (S.test.cur < S.test.qs.length - 1) {
+    S.test.cur++;
+    renderDots();
+    renderQ(S.test.cur);
+    window.scrollTo(0,0);
   }
 }
 function prevQ() {
-  if (state.test.current > 0) {
-    state.test.current--;
-    renderQuestion(state.test.current);
+  saveFill();
+  if (S.test.cur > 0) {
+    S.test.cur--;
+    renderDots();
+    renderQ(S.test.cur);
+    window.scrollTo(0,0);
   }
+}
+function saveFill() {
+  var inp = document.getElementById('t-fill-inp');
+  if (inp) S.test.ans[S.test.cur] = inp.value.trim();
 }
 
 function submitTest() {
-  // Save last fill
-  const q = state.test.questions[state.test.current];
-  if (q.type === 'fill') {
-    const inp = document.getElementById('fill-ans');
-    if (inp) state.test.answers[state.test.current] = inp.value.trim();
-  }
-  if (state.test.timerInterval) clearInterval(state.test.timerInterval);
-  const elapsed = Math.floor((Date.now() - state.test.startTime) / 1000);
-  calculateResults(elapsed);
-  showScreen('results');
+  saveFill();
+  if (S.test.timer) clearInterval(S.test.timer);
+  var elapsed = Math.floor((Date.now() - S.test.start) / 1000);
+  calcResults(elapsed);
+  showScreen('sr');
 }
 
-// ═══════════════════ RESULTS ═══════════════════
-function calculateResults(elapsed) {
-  const qs = state.test.questions;
-  const ans = state.test.answers;
-  let correct = 0;
-  const categoryScores = {};
-  const details = [];
+// ══════════════════════════════════════
+//  RESULTS
+// ══════════════════════════════════════
+function calcResults(elapsed) {
+  var qs = S.test.qs;
+  var ans = S.test.ans;
+  var correct = 0;
+  var catScores = {};
+  var details = [];
 
-  qs.forEach((q, i) => {
-    const userAns = (ans[i] || '').trim().toLowerCase();
-    const correctAns = (q.answer || '').trim().toLowerCase();
-    const isCorrect = userAns === correctAns;
-    if (isCorrect) correct++;
-    const cat = q.category || 'Tổng quát';
-    if (!categoryScores[cat]) categoryScores[cat] = { correct: 0, total: 0 };
-    categoryScores[cat].total++;
-    if (isCorrect) categoryScores[cat].correct++;
-    details.push({ q: q.question, isCorrect, userAns: ans[i] || '(Bỏ qua)', correctAns: q.answer, explanation: q.explanation });
+  qs.forEach(function(q, i) {
+    var u = String(ans[i] || '').trim().toLowerCase();
+    var c = String(q.answer || '').trim().toLowerCase();
+    var ok = u === c;
+    if (ok) correct++;
+    var cat = q.category || 'Tổng quát';
+    if (!catScores[cat]) catScores[cat] = {c:0, t:0};
+    catScores[cat].t++;
+    if (ok) catScores[cat].c++;
+    details.push({q:q.question, ok:ok, ua:ans[i]||'(Bỏ qua)', ca:q.answer, exp:q.explanation});
   });
 
-  const total = qs.length;
-  const pct = Math.round(correct / total * 100);
+  var total = qs.length;
+  var pct = Math.round(correct/total*100);
 
-  state.results = { correct, total, pct, categoryScores, details, elapsed };
+  // Score circle
+  var rnum = document.getElementById('r-num');
+  rnum.textContent = correct;
+  rnum.style.color = pct>=70?'var(--green)':pct>=50?'var(--orange)':'var(--red)';
+  document.getElementById('r-den').textContent = '/ ' + total;
 
-  // Score display
-  const scoreNum = document.getElementById('score-num');
-  scoreNum.textContent = correct;
-  scoreNum.style.color = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--orange)' : 'var(--red)';
-  document.getElementById('score-den').textContent = `/ ${total}`;
+  var grade, msg;
+  if (pct>=90){grade='🏆 Xuất sắc!';msg='Bạn đã nắm vững bài học! Tiếp tục phát huy nhé.';}
+  else if (pct>=80){grade='🌟 Giỏi!';msg='Kết quả rất tốt! Chỉ cần ôn thêm một chút nữa.';}
+  else if (pct>=70){grade='👍 Khá!';msg='Nắm được kiến thức cơ bản. Ôn luyện thêm phần yếu nhé.';}
+  else if (pct>=50){grade='📚 Trung bình';msg='Cần ôn tập thêm. Đừng nản, mỗi ngày một chút!';}
+  else {grade='💪 Cần cố gắng hơn!';msg='Hãy xem lại bài học và thử lại. Bạn làm được!';}
+  document.getElementById('r-grade').textContent = grade;
+  document.getElementById('r-msg').textContent = msg;
 
-  let grade, msg;
-  if (pct >= 90) { grade = '🏆 Xuất sắc!'; msg = 'Bạn đã nắm vững bài học! Tiếp tục phát huy nhé.'; }
-  else if (pct >= 80) { grade = '🌟 Giỏi!'; msg = 'Kết quả rất tốt! Chỉ cần ôn thêm một chút là hoàn hảo.'; }
-  else if (pct >= 70) { grade = '👍 Khá!'; msg = 'Nắm được kiến thức cơ bản. Hãy ôn luyện thêm phần yếu.'; }
-  else if (pct >= 50) { grade = '📚 Trung bình'; msg = 'Cần ôn tập thêm. Đừng nản, mỗi ngày một chút nhé!'; }
-  else { grade = '💪 Cần cố gắng hơn!'; msg = 'Hãy xem lại bài học và thử lại. Bạn làm được!'; }
-
-  document.getElementById('results-grade').textContent = grade;
-  document.getElementById('results-msg').textContent = msg;
-
-  // Bar chart
-  renderBarChart(categoryScores);
-
-  // Radar
-  setTimeout(() => drawRadar(categoryScores, pct), 200);
-
-  // Strengths & Weaknesses
-  renderSW(categoryScores);
-
-  // Review table
+  renderBarChart(catScores);
+  setTimeout(function(){ drawRadar(catScores); }, 150);
+  renderSW(catScores);
   renderReview(details);
-
-  // Recommendations
-  const recoTexts = (state.lesson?.recommendations || []);
-  const extraRecos = [];
-  Object.entries(categoryScores).forEach(([cat, sc]) => {
-    const p = sc.correct / sc.total * 100;
-    if (p < 50) extraRecos.push(`Cần ôn tập thêm mảng <strong>${cat}</strong> – bạn chỉ đúng ${sc.correct}/${sc.total} câu.`);
-  });
-  document.getElementById('reco-list').innerHTML = [...recoTexts, ...extraRecos].map((r, i) => {
-    const icons = ['🔥','📚','🎯','💡','⏰','🌟'];
-    return `<div class="reco-item"><div class="reco-icon">${icons[i % icons.length]}</div><div class="reco-text">${r}</div></div>`;
-  }).join('');
-
-  // Save history
-  saveHistory(correct, total, pct, elapsed);
-  renderHistory();
+  renderRecos(catScores);
+  saveHist(correct, total, pct, elapsed);
+  renderHist();
 }
 
-function renderBarChart(catScores) {
-  const chart = document.getElementById('bar-chart');
-  chart.innerHTML = Object.entries(catScores).map(([cat, sc]) => {
-    const pct = Math.round(sc.correct / sc.total * 100);
-    const color = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--orange)' : 'var(--red)';
-    return `<div class="bar-row">
-      <div class="bar-label">${cat}</div>
-      <div class="bar-bg">
-        <div class="bar-fill" style="width:${pct}%;background:${color}">
-          <span>${pct}%</span>
-        </div>
-      </div>
-      <div class="bar-score" style="color:${color}">${sc.correct}/${sc.total}</div>
-    </div>`;
+function renderBarChart(cs) {
+  document.getElementById('bar-chart').innerHTML = Object.entries(cs).map(function(entry) {
+    var cat = entry[0], sc = entry[1];
+    var pct = Math.round(sc.c/sc.t*100);
+    var col = pct>=70?'var(--green)':pct>=50?'var(--orange)':'var(--red)';
+    return '<div class="bar-row">'
+      + '<div class="bar-lbl">' + esc(cat) + '</div>'
+      + '<div class="bar-bg"><div class="bar-fill" style="width:0%;background:' + col + '" data-w="' + pct + '%"><span>' + pct + '%</span></div></div>'
+      + '<div class="bar-sc" style="color:' + col + '">' + sc.c + '/' + sc.t + '</div>'
+      + '</div>';
   }).join('');
-  // Animate
-  setTimeout(() => {
-    chart.querySelectorAll('.bar-fill').forEach(b => { const w = b.style.width; b.style.width = '0'; setTimeout(() => b.style.width = w, 50); });
+  setTimeout(function() {
+    document.querySelectorAll('.bar-fill').forEach(function(b){ b.style.width = b.dataset.w; });
   }, 100);
 }
 
-function drawRadar(catScores, overallPct) {
-  const canvas = document.getElementById('radarCanvas');
+function drawRadar(cs) {
+  var canvas = document.getElementById('radar');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2, r = Math.min(W,H)/2 - 40;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var cx = W/2, cy = H/2, r = Math.min(W,H)/2 - 42;
+  var cats = Object.keys(cs);
+  var vals = cats.map(function(c){ return cs[c].c/cs[c].t; });
+  var n = cats.length;
+  if (n < 2) return;
 
-  const categories = Object.keys(catScores);
-  const values = categories.map(c => catScores[c].correct / catScores[c].total);
-  const n = categories.length || 1;
+  ctx.clearRect(0,0,W,H);
 
-  ctx.clearRect(0, 0, W, H);
-
-  // Background circles
-  [0.25, 0.5, 0.75, 1].forEach(scale => {
+  // Grid
+  [.25,.5,.75,1].forEach(function(scale) {
     ctx.beginPath();
-    for (let i = 0; i < n; i++) {
-      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
-      const x = cx + r * scale * Math.cos(angle);
-      const y = cy + r * scale * Math.sin(angle);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    for (var i=0;i<n;i++) {
+      var a = (Math.PI*2*i/n) - Math.PI/2;
+      var x = cx+r*scale*Math.cos(a), y = cy+r*scale*Math.sin(a);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
     }
     ctx.closePath();
-    ctx.strokeStyle = 'rgba(203,213,225,0.5)';
+    ctx.strokeStyle = 'rgba(203,213,225,.6)';
     ctx.lineWidth = 1;
     ctx.stroke();
-    if (scale === 1) {
-      ctx.fillStyle = 'rgba(224,242,254,0.2)';
-      ctx.fill();
-    }
   });
-
   // Spokes
-  categories.forEach((_, i) => {
-    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
-    ctx.strokeStyle = 'rgba(203,213,225,0.8)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  });
-
-  // Data polygon
+  for (var i=0;i<n;i++) {
+    var a = (Math.PI*2*i/n) - Math.PI/2;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    ctx.strokeStyle='rgba(203,213,225,.8)'; ctx.lineWidth=1; ctx.stroke();
+  }
+  // Data
   ctx.beginPath();
-  values.forEach((v, i) => {
-    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
-    const x = cx + r * v * Math.cos(angle);
-    const y = cy + r * v * Math.sin(angle);
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  vals.forEach(function(v,i) {
+    var a = (Math.PI*2*i/n) - Math.PI/2;
+    var x = cx+r*v*Math.cos(a), y = cy+r*v*Math.sin(a);
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
   });
   ctx.closePath();
-  ctx.fillStyle = 'rgba(14,165,233,0.25)';
-  ctx.fill();
-  ctx.strokeStyle = '#0EA5E9';
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-
+  ctx.fillStyle='rgba(14,165,233,.22)'; ctx.fill();
+  ctx.strokeStyle='#0EA5E9'; ctx.lineWidth=2.5; ctx.stroke();
   // Dots
-  values.forEach((v, i) => {
-    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
-    const x = cx + r * v * Math.cos(angle);
-    const y = cy + r * v * Math.sin(angle);
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI*2);
-    ctx.fillStyle = v >= 0.7 ? '#22C55E' : v >= 0.5 ? '#F97316' : '#EF4444';
-    ctx.fill();
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    ctx.stroke();
+  vals.forEach(function(v,i) {
+    var a = (Math.PI*2*i/n) - Math.PI/2;
+    var x = cx+r*v*Math.cos(a), y = cy+r*v*Math.sin(a);
+    ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2);
+    ctx.fillStyle = v>=.7?'#22C55E':v>=.5?'#F97316':'#EF4444';
+    ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
   });
-
   // Labels
-  ctx.font = '12px Nunito, sans-serif';
+  ctx.font = '11px Nunito,sans-serif';
   ctx.fillStyle = '#1E293B';
   ctx.textAlign = 'center';
-  categories.forEach((cat, i) => {
-    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
-    const lx = cx + (r + 28) * Math.cos(angle);
-    const ly = cy + (r + 28) * Math.sin(angle);
-    ctx.fillText(cat.length > 8 ? cat.substring(0,8)+'…' : cat, lx, ly + 4);
+  cats.forEach(function(cat,i) {
+    var a = (Math.PI*2*i/n) - Math.PI/2;
+    var lx = cx+(r+30)*Math.cos(a), ly = cy+(r+30)*Math.sin(a);
+    ctx.fillText(cat.length>9?cat.substring(0,9)+'…':cat, lx, ly+4);
   });
 }
 
-function renderSW(catScores) {
-  const strengths = [], weaknesses = [];
-  Object.entries(catScores).forEach(([cat, sc]) => {
-    const p = sc.correct / sc.total * 100;
-    if (p >= 70) strengths.push(`${cat}: ${sc.correct}/${sc.total} câu đúng`);
-    else weaknesses.push(`${cat}: chỉ ${sc.correct}/${sc.total} câu đúng`);
+function renderSW(cs) {
+  var strengths=[], weaknesses=[];
+  Object.entries(cs).forEach(function(e) {
+    var cat=e[0], sc=e[1];
+    var p = sc.c/sc.t*100;
+    if (p>=70) strengths.push(cat+': '+sc.c+'/'+sc.t+' câu đúng');
+    else weaknesses.push(cat+': chỉ '+sc.c+'/'+sc.t+' câu đúng');
   });
-  document.getElementById('sw-grid').innerHTML = `
-    <div class="sw-card strength">
-      <div class="sw-title">💪 Điểm mạnh</div>
-      ${strengths.length ? strengths.map(s => `<div class="sw-item">✓ ${s}</div>`).join('') : '<div class="sw-item">Tiếp tục luyện tập!</div>'}
-    </div>
-    <div class="sw-card weakness">
-      <div class="sw-title">📖 Cần cải thiện</div>
-      ${weaknesses.length ? weaknesses.map(w => `<div class="sw-item">⚠ ${w}</div>`).join('') : '<div class="sw-item">Tuyệt vời! Không có điểm yếu lớn.</div>'}
-    </div>`;
+  document.getElementById('sw-grid').innerHTML =
+    '<div class="sw-card str"><div class="sw-t">💪 Điểm mạnh</div>'
+    + (strengths.length ? strengths.map(function(s){ return '<div class="sw-i">✓ '+esc(s)+'</div>'; }).join('') : '<div class="sw-i">Tiếp tục luyện tập!</div>')
+    + '</div>'
+    + '<div class="sw-card wk"><div class="sw-t">📖 Cần cải thiện</div>'
+    + (weaknesses.length ? weaknesses.map(function(w){ return '<div class="sw-i">⚠ '+esc(w)+'</div>'; }).join('') : '<div class="sw-i">Tuyệt! Không có điểm yếu lớn.</div>')
+    + '</div>';
 }
 
 function renderReview(details) {
-  document.getElementById('review-body').innerHTML = details.map((d, i) => `
-    <tr>
-      <td class="q-idx">${i+1}</td>
-      <td style="font-size:12px;line-height:1.5">${d.q.substring(0, 70)}${d.q.length>70?'…':''}</td>
-      <td class="${d.isCorrect ? 'correct-badge' : 'wrong-badge'}">${d.isCorrect ? '✓' : '✗'}</td>
-    </tr>`).join('');
-}
-
-// ═══════════════════ HISTORY ═══════════════════
-function saveHistory(correct, total, pct, elapsed) {
-  const hist = JSON.parse(localStorage.getItem('ep_history') || '[]');
-  hist.unshift({
-    topic: state.topic,
-    grade: state.grade,
-    level: state.level,
-    skills: state.skills,
-    score: correct,
-    total,
-    pct,
-    elapsed,
-    date: new Date().toLocaleDateString('vi-VN')
-  });
-  localStorage.setItem('ep_history', JSON.stringify(hist.slice(0, 10)));
-}
-
-function renderHistory() {
-  const hist = JSON.parse(localStorage.getItem('ep_history') || '[]');
-  const cont = document.getElementById('history-list');
-  if (!hist.length) { cont.innerHTML = '<div style="color:var(--text-muted);font-size:13px">Chưa có lịch sử.</div>'; return; }
-  cont.innerHTML = hist.map(h => {
-    const cls = h.pct >= 70 ? 'good' : h.pct >= 50 ? 'ok' : 'bad';
-    return `<div class="history-item">
-      <div><div class="history-topic">${h.topic}</div><div style="font-size:11px;color:var(--text-muted)">Lớp ${h.grade} · ${h.date}</div></div>
-      <div class="history-score ${cls}">${h.score}/${h.total}</div>
-    </div>`;
+  document.getElementById('rv-body').innerHTML = details.map(function(d,i) {
+    return '<tr><td style="color:var(--muted);font-weight:700">' + (i+1) + '</td>'
+      + '<td style="font-size:12px;line-height:1.5">' + esc(d.q.substring(0,65)) + (d.q.length>65?'…':'') + '</td>'
+      + '<td class="' + (d.ok?'ok-b':'no-b') + '">' + (d.ok?'✓':'✗') + '</td></tr>';
   }).join('');
 }
 
-// ═══════════════════ UTILS ═══════════════════
+function renderRecos(cs) {
+  var recos = (S.lesson && S.lesson.recommendations) || [];
+  var extra = [];
+  Object.entries(cs).forEach(function(e) {
+    var cat=e[0], sc=e[1];
+    if (sc.c/sc.t < 0.5) extra.push('Cần ôn tập thêm mảng <strong>'+esc(cat)+'</strong> – chỉ đúng '+sc.c+'/'+sc.t+' câu.');
+  });
+  var all = recos.concat(extra);
+  var icons = ['🔥','📚','🎯','💡','⏰','🌟'];
+  document.getElementById('reco-list').innerHTML = all.map(function(r,i) {
+    return '<div class="reco-i"><div class="reco-ico">'+icons[i%icons.length]+'</div><div>'+r+'</div></div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════
+//  HISTORY
+// ══════════════════════════════════════
+function saveHist(correct, total, pct, elapsed) {
+  try {
+    var hist = JSON.parse(localStorage.getItem('ep_hist')||'[]');
+    hist.unshift({topic:S.topic,grade:S.grade,score:correct,total:total,pct:pct,date:new Date().toLocaleDateString('vi-VN')});
+    localStorage.setItem('ep_hist', JSON.stringify(hist.slice(0,10)));
+  } catch(e) {}
+}
+function renderHist() {
+  var cont = document.getElementById('hist-list');
+  if (!cont) return;
+  try {
+    var hist = JSON.parse(localStorage.getItem('ep_hist')||'[]');
+    if (!hist.length) { cont.innerHTML='<div style="color:var(--muted);font-size:13px">Chưa có lịch sử.</div>'; return; }
+    cont.innerHTML = hist.map(function(h) {
+      var cls = h.pct>=70?'g':h.pct>=50?'o':'r';
+      return '<div class="hist-item">'
+        + '<div><div style="font-weight:700">'+esc(h.topic)+'</div><div style="font-size:11px;color:var(--muted)">Lớp '+esc(h.grade)+' · '+esc(h.date)+'</div></div>'
+        + '<div class="h-sc '+cls+'">'+h.score+'/'+h.total+'</div>'
+        + '</div>';
+    }).join('');
+  } catch(e) {}
+}
+
+// ══════════════════════════════════════
+//  RESTART
+// ══════════════════════════════════════
+function restartApp() {
+  S.role=''; S.grade=''; S.level=''; S.topic=''; S.skills=[];
+  S.lesson=null; S.test={qs:[],ans:{},cur:0,start:null,timer:null}; S.selfAssess={};
+  // Reset UI
+  document.querySelectorAll('.role-card').forEach(function(c){ c.classList.remove('sel'); });
+  document.getElementById('sel-grade').value='';
+  document.getElementById('sel-level').value='';
+  document.getElementById('inp-topic').value='';
+  document.querySelectorAll('.s-chip').forEach(function(c){ c.classList.remove('sel'); });
+  document.getElementById('btn-s1-next').disabled = true;
+  document.getElementById('btn-s2-next').disabled = true;
+  document.getElementById('btn-generate').disabled = true;
+  goStep(1);
+  showScreen('ss');
+}
+
+// ══════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════
+function esc(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(function(){ t.classList.remove('show'); }, 3500);
 }
-
-function restart() {
-  state.role = '';
-  state.grade = '';
-  state.level = '';
-  state.topic = '';
-  state.skills = [];
-  state.lesson = null;
-  state.test = { questions: [], answers: {}, current: 0, startTime: null, timerInterval: null };
-  state.selfAssess = {};
-  state.results = null;
-  // Reset form
-  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('sel-grade').value = '';
-  document.getElementById('sel-level').value = '';
-  document.getElementById('inp-topic').value = '';
-  document.querySelectorAll('.skill-chip').forEach(c => c.classList.remove('selected'));
-  document.getElementById('btn-step1-next').disabled = true;
-  document.getElementById('btn-step2-next').disabled = true;
-  document.getElementById('btn-generate').disabled = true;
-  nextStep(1);
-  showScreen('setup');
-}
-
-// Init
-renderHistory();
 </script>
 </body>
 </html>
